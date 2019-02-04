@@ -13,6 +13,24 @@ class Gigster extends Component {
     sets: []
   };
 
+
+
+  populateAppState () {
+    DataManager.fetchData({
+      "dataSet" : "users",
+      "fetchType" : "GET",
+      "dataBaseObject" : "",
+      "embedItem" : "?_embed=artists"
+    })
+    .then(users => {this.setState({users: users})})
+    .then(() => DataManager.fetchData({
+      "dataSet" : "artists",
+      "fetchType" : "GET",
+      "dataBaseObject" : "",
+      "embedItem" : "?_embed=artistsToSongs"
+    }))
+  }
+
   getAllUsers = () => {
     return DataManager.fetchData({
       "dataSet" : "users",
