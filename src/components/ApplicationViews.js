@@ -19,7 +19,8 @@ export default class ApplicationViews extends Component {
       getAllUsers={this.props.getAllUsers}/>
       }}/>
       <Route path="/home" render={props => {
-    return <Home />
+    return <Home
+      artists={this.props.artists} />
       }}/>
 </React.Fragment>
     )
