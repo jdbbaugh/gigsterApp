@@ -15,7 +15,6 @@ class Gigster extends Component {
   };
 
 
-
   populateAppState () {
     let currentUser = [];
     DataManager.fetchData({
@@ -37,9 +36,14 @@ class Gigster extends Component {
       "embedItem" : ""
     }))
     .then(artists => {
-      console.log(artists)
+      // console.log(artists)
     })
   }
+
+
+componentDidMount() {
+  this.populateAppState()
+}
 
   getAllUsers = () => {
     return DataManager.fetchData({

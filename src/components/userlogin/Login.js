@@ -20,8 +20,11 @@ export default class Login extends Component {
     onLogin = (evt) => {
     evt.preventDefault();
     this.props.registerHere()
-        .then(allUsers => { console.log(allUsers)
-            if(allUsers.length < 1) {
+        .then(allUsers => {
+          // console.log(allUsers)
+          let findingUser = allUsers.filter(user => user.userName === this.state.userName)
+          // console.log(findingUser)
+            if(findingUser.length < 1) {
                 alert("We can't seem to find you! Try registering below")
             } else {
                 allUsers.forEach(user => {
@@ -33,8 +36,6 @@ export default class Login extends Component {
                         sessionStorage.setItem("user", user.id);
                         console.log("You're logged in as user", user.id)
                         // this.props.history.push("/news");
-                    } else {
-                      console.log("nah")
                     }
                 })
             }
