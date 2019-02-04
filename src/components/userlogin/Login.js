@@ -19,8 +19,8 @@ export default class Login extends Component {
 
     onLogin = (evt) => {
     evt.preventDefault();
-    this.props.registerHere(this.state.userName, this.state.password)
-        .then(allUsers => {
+    this.props.registerHere()
+        .then(allUsers => { console.log(allUsers)
             if(allUsers.length < 1) {
                 alert("We can't seem to find you! Try registering below")
             } else {
@@ -30,8 +30,11 @@ export default class Login extends Component {
                             loggedIn= true;
                         }
                     if (loggedIn === true){
-                        sessionStorage.setItem("User", user.id);
-                        this.props.history.push("/news");
+                        sessionStorage.setItem("user", user.id);
+                        console.log("You're logged in as user", user.id)
+                        // this.props.history.push("/news");
+                    } else {
+                      console.log("nah")
                     }
                 })
             }
@@ -41,9 +44,9 @@ export default class Login extends Component {
 
     componentDidMount () {
 
-        if (sessionStorage.getItem("User") !== null) {
+        if (sessionStorage.getItem("user") !== null) {
 
-            sessionStorage.removeItem("User")
+            sessionStorage.removeItem("user")
         }
     }
 

@@ -40,7 +40,7 @@ export default {
 //     "dataSet" : "users",
 //     "fetchType" : "GET",
 //     "dataBaseObject" : "",
-//     "embedItem" : "?_embed=events"
+//     "embedItem" : "_embed=events"
 // }
 
 // POST

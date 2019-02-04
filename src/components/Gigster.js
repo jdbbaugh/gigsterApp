@@ -36,6 +36,9 @@ class Gigster extends Component {
       "dataBaseObject" : "",
       "embedItem" : ""
     }))
+    .then(artists => {
+      console.log(artists)
+    })
   }
 
   getAllUsers = () => {
@@ -48,8 +51,13 @@ class Gigster extends Component {
   //  .then(()=> this.populateAppState())
   }
 
-  registerHere = (username, password) => {
-    return DataManager.registerHere(username, password)
+  registerHere = () => {
+   return DataManager.fetchData({
+        "dataSet" : "users",
+        "fetchType" : "GET",
+        "dataBaseObject" : "",
+        "embedItem" : "_embed=songs"
+    })
     // .then(() => DataManager.getAll("users"))
     // .then(allUsers => this.setState({
     //   users: allUsers}))
@@ -66,7 +74,8 @@ class Gigster extends Component {
     return (
       <ApplicationViews
         addUser={this.addUser}
-        getAllUsers={this.getAllUsers} />
+        getAllUsers={this.getAllUsers}
+        registerHere={this.registerHere} />
     );
   }
 }
