@@ -48,12 +48,19 @@ class Gigster extends Component {
   //  .then(()=> this.populateAppState())
   }
 
+  registerHere = (username, password) => {
+    return DataManager.registerHere(username, password)
+    // .then(() => DataManager.getAll("users"))
+    // .then(allUsers => this.setState({
+    //   users: allUsers}))
+    }
+
 
 
   addUser = user =>
   DataManager.fetchData(user)
   .then(() => this.populateAppState())
-  .then(()=>this.registerHere(user.username, user.password));
+  // .then(()=>this.registerHere(user.username, user.password));
 
   render() {
     return (
