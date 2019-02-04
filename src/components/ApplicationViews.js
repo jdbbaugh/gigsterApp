@@ -9,13 +9,12 @@ export default class ApplicationViews extends Component {
 <React.Fragment>
   <Route exact path="/" render={props => {
     return <Login {...props}
-      registerHere={this.props.registerHere} />
+      checkUserLogin={this.props.checkUserLogin} />
       }}/>
   <Route path="/register" render={props => {
     return <Register {...props}
       addUser={this.props.addUser}
       users={this.props.users}
-      registerHere={this.props.registerHere}
       getAllUsers={this.props.getAllUsers}/>
       }}/>
 </React.Fragment>

@@ -19,7 +19,7 @@ export default class Login extends Component {
 
     onLogin = (evt) => {
     evt.preventDefault();
-    this.props.registerHere()
+    this.props.checkUserLogin()
         .then(allUsers => {
           // console.log(allUsers)
           let findingUser = allUsers.filter(user => user.userName === this.state.userName)

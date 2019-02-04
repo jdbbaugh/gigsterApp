@@ -55,7 +55,7 @@ componentDidMount() {
   //  .then(()=> this.populateAppState())
   }
 
-  registerHere = () => {
+  checkUserLogin = () => {
    return DataManager.fetchData({
         "dataSet" : "users",
         "fetchType" : "GET",
@@ -72,14 +72,14 @@ componentDidMount() {
   addUser = user =>
   DataManager.fetchData(user)
   .then(() => this.populateAppState())
-  // .then(()=>this.registerHere(user.username, user.password));
+  // .then(()=>this.checkUserLogin(user.username, user.password));
 
   render() {
     return (
       <ApplicationViews
         addUser={this.addUser}
         getAllUsers={this.getAllUsers}
-        registerHere={this.registerHere} />
+        checkUserLogin={this.checkUserLogin} />
     );
   }
 }
