@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 class Gigster extends Component {
   state = {
     users: [],
+    currentUser: [],
     artists: [],
     artistToSongs: [],
     songs: [],
@@ -16,18 +17,24 @@ class Gigster extends Component {
 
 
   populateAppState () {
+    let currentUser = [];
     DataManager.fetchData({
       "dataSet" : "users",
       "fetchType" : "GET",
       "dataBaseObject" : "",
-      "embedItem" : "?_embed=artists"
+      "embedItem" : ""
     })
     .then(users => {this.setState({users: users})})
+    .then(() => {
+      let user = this.state.users.find(user => user.id === Number(sessionStorage.getItem("user")))
+      currentUser.push(user)
+      this.setState({ currentUser: currentUser })
+    })
     .then(() => DataManager.fetchData({
       "dataSet" : "artists",
       "fetchType" : "GET",
       "dataBaseObject" : "",
-      "embedItem" : "?_embed=artistsToSongs"
+      "embedItem" : ""
     }))
   }
 
