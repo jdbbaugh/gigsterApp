@@ -84,6 +84,11 @@ componentDidMount() {
   .then(() => this.populateAppState())
   // .then(()=>this.checkUserLogin(user.username, user.password));
 
+  addArtist = artistToAdd =>
+  DataManager.fetchData(artistToAdd)
+  .then(() => this.populateAppState())
+
+
   render() {
     return (
       <ApplicationViews
