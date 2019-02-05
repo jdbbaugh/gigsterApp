@@ -4,6 +4,12 @@ import Button from 'react-bootstrap/Button'
 
 export default class SongCard extends Component {
   render() {
+    console.log(this.props.artistToSongs.find(artistToSong => artistToSong.songId === 4))
+    // console.log(matchArtistToTable)
+
+    let isSpecifiedArtistsSong = false
+
+
     return (
       <Card className="artist-specific-container" style={{ width: '18rem' }}>
         <Card.Body>

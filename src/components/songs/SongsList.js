@@ -116,8 +116,11 @@ export default class Home extends Component {
     const speciifySongIdToEdit = (artistId) => {
       console.log(artistId, sessionUserId)
       this.setState({artistIdForEditing: artistId})
-
+      // this will be to edit stuff in the song specific json so keep it for now
     }
+
+    let songsAssociatedWithArtist = this.props.artistToSongs.filter(artistToSong => artistToSong.artistId === this.props.selectedArtistForSongsList);
+    console.log(songsAssociatedWithArtist)
 
     return (
       <React.Fragment>
@@ -136,9 +139,11 @@ export default class Home extends Component {
             return <SongCard
             key={song.id}
             song={song}
+            artists={this.props.artists}
+            artistToSongs={this.props.artistToSongs}
             addToJson={this.props.addToJson}
-            artistSelectedByUser={this.props.artistSelectedByUser}
             speciifySongIdToEdit={speciifySongIdToEdit}
+            selectedArtistForSongsList={this.props.selectedArtistForSongsList}
             />
             } else {
               return null

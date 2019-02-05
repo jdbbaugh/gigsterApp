@@ -38,6 +38,7 @@ export default class ApplicationViews extends Component {
     return <SongsList
       artists={this.props.artists}
       songs={this.props.songs}
+      artistToSongs={this.props.artistToSongs}
       addToJson={this.props.addToJson}
       selectedArtistForSongsList={this.state.selectedArtistForSongsList} />
       }}/>
