@@ -85,7 +85,6 @@ addNewArtist = evt => {
 export default class Home extends Component {
   constructor(...args) {
     super(...args)
-    console.log(...args)
 
     this.state = {
       modalShow: false,

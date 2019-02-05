@@ -91,7 +91,8 @@ componentDidMount() {
         addToJson={this.addToJson}
         getAllUsers={this.getAllUsers}
         checkUserLogin={this.checkUserLogin}
-        artists={this.state.artists} />
+        artists={this.state.artists}
+        songs={this.state.songs} />
     );
   }
 }

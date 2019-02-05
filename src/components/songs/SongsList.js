@@ -22,8 +22,12 @@ import Button from 'react-bootstrap/Button'
 class MyVerticallyCenteredModalSongs extends Component {
   state = {
     "userId": Number(sessionStorage.getItem("user")),
-    "artistName": "",
-    "artistImageUrl": ""
+    "songName": "",
+    "genre": "",
+    "writer": "",
+    "progression": "",
+    "url": "",
+    "notes": ""
   }
 
   handleFieldChange = evt => {
@@ -35,7 +39,7 @@ class MyVerticallyCenteredModalSongs extends Component {
 addNewArtist = evt => {
   evt.preventDefault()
   // this.props.addToJson({
-  //   "dataSet" : "artists",
+  //   "dataSet" : "songs",
   //   "fetchType" : "POST",
   //   "dataBaseObject": {
   //     artistName: this.state.artistName,
@@ -107,7 +111,6 @@ addNewArtist = evt => {
 export default class Home extends Component {
   constructor(...args) {
     super(...args)
-    console.log(...args)
 
     this.state = {
       modalShow: false,
@@ -134,13 +137,11 @@ export default class Home extends Component {
           addToJson={this.props.addToJson}
         />
       <section className="artists-container">
-        {this.props.artists.map( artist =>{
-          if (artist.userId === sessionUserId) {
+        {this.props.songs.map( song =>{
+          if (song.userId === sessionUserId) {
             return <SongCard
-            key={artist.id}
-            artist={artist}
-            speciifyArtistIdToEdit={speciifyArtistIdToEdit}
-            artistIdForEditing={this.state.artistIdForEditing}
+            key={song.id}
+            song={song}
             addToJson={this.props.addToJson}
             artistSelectedByUser={this.props.artistSelectedByUser}
             />
