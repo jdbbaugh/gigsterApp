@@ -97,7 +97,7 @@ export default class Home extends Component {
     let sessionUserId = Number(sessionStorage.getItem("user"));
     console.log("Home",sessionUserId)
 
-    const artistNameToEdit = (artistId) => {
+    const speciifyArtistIdToEdit = (artistId) => {
       console.log(artistId, sessionUserId)
       this.setState({artistIdForEditing: artistId})
 
@@ -117,7 +117,7 @@ export default class Home extends Component {
             return <ArtistCard
             key={artist.id}
             artist={artist}
-            artistNameToEdit={artistNameToEdit}
+            speciifyArtistIdToEdit={speciifyArtistIdToEdit}
             artistIdForEditing={this.state.artistIdForEditing}
             />
             } else {

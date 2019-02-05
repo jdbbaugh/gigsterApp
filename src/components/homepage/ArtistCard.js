@@ -19,9 +19,8 @@ export default class ArtistCard extends Component {
     <Card.Body>
       <ArtistNameSaveEdit
       artist={this.props.artist}
-      artistNameToEdit={this.props.artistNameToEdit}
+      speciifyArtistIdToEdit={this.props.speciifyArtistIdToEdit}
       />
-      <Button variant="primary" >Work Tunes</Button>
     </Card.Body>
   </Card>
       )
@@ -31,7 +30,7 @@ export default class ArtistCard extends Component {
   <Card className="artist-specific-container" style={{ width: '18rem' }}>
     <Card.Img variant="top" src={this.props.artist.artistImageUrl} />
     <Card.Body>
-      <Card.Title>{this.props.artist.artistName}<a onClick={()=> this.props.artistNameToEdit(this.props.artist.id)}
+      <Card.Title>{this.props.artist.artistName}<a onClick={()=> this.props.speciifyArtistIdToEdit(this.props.artist.id)}
         className="edit-name">  editThisName</a></Card.Title>
       <Button variant="primary" >Work Tunes</Button>
     </Card.Body>
