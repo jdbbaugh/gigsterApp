@@ -8,8 +8,9 @@ import "./ArtistCard.css"
 
 export default class ArtistCard extends Component {
 
-  artistSelectedByUser = evt => {
-    console.log("clicked it")
+  userSelectedArtist = evt => {
+    console.log("Artist is:",this.props.artist.id)
+    this.props.artistSelectedByUser(this.props.artist.id)
   }
 
   render() {
@@ -36,7 +37,13 @@ export default class ArtistCard extends Component {
         <Card.Body>
           <Card.Title>{this.props.artist.artistName}<a onClick={()=> this.props.speciifyArtistIdToEdit(this.props.artist.id)}
             className="edit-name">  editThisName</a></Card.Title>
-          <Link to="/songs"><Button variant="primary" onClick={this.artistSelectedByUser}>Work Tunes</Button></Link>
+          <Link to="/songs">
+            <Button
+              variant="primary"
+              onClick={this.userSelectedArtist}>
+                Work Tunes
+            </Button>
+          </Link>
         </Card.Body>
       </Card>
     )
