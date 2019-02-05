@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Route, Redirect } from "react-router-dom"
 import Login from "./userlogin/Login"
-import Home from "./homepage/Home"
 import Register from "./userlogin/Register"
+import Home from "./homepage/Home"
+import SongsList from "./songs/SongsList"
 
 export default class ApplicationViews extends Component {
   render() {
@@ -20,6 +21,11 @@ export default class ApplicationViews extends Component {
       }}/>
       <Route path="/home" render={props => {
     return <Home
+      artists={this.props.artists}
+      addToJson={this.props.addToJson} />
+      }}/>
+      <Route path="/songs" render={props => {
+    return <SongsList
       artists={this.props.artists}
       addToJson={this.props.addToJson} />
       }}/>
