@@ -6,9 +6,13 @@ import Home from "./homepage/Home"
 import SongsList from "./songs/SongsList"
 
 export default class ApplicationViews extends Component {
+  state = {
+    selectedArtistForSongsList: 0
+  }
 
   artistSelectedByUser = selectedArtist => {
-    console.log("But for real Artist is:",selectedArtist)
+    console.log("But for real Artist is:",selectedArtist);
+    this.setState({selectedArtistForSongsList: selectedArtist})
   }
 
   render() {
@@ -33,7 +37,8 @@ export default class ApplicationViews extends Component {
       <Route path="/songs" render={props => {
     return <SongsList
       artists={this.props.artists}
-      addToJson={this.props.addToJson} />
+      addToJson={this.props.addToJson}
+      selectedArtistForSongsList={this.state.selectedArtistForSongsList} />
       }}/>
 </React.Fragment>
     )

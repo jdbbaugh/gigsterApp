@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 
 
-class MyVerticallyCenteredModal extends Component {
+class MyVerticallyCenteredModalArtists extends Component {
   state = {
     "userId": Number(sessionStorage.getItem("user")),
     "artistName": "",
@@ -106,7 +106,7 @@ export default class Home extends Component {
     return (
       <React.Fragment>
       <Button variant="primary" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Artist</Button>
-      <MyVerticallyCenteredModal
+      <MyVerticallyCenteredModalArtists
           show={this.state.modalShow}
           onHide={modalClose}
           addToJson={this.props.addToJson}
