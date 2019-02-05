@@ -30,3 +30,9 @@
     transform: rotate(360deg);
   }
 }
+
+.artists-container {
+  display: flex;
+  justify-content: space-around;
+
+}

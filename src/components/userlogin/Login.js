@@ -35,7 +35,7 @@ export default class Login extends Component {
                     if (loggedIn === true){
                         sessionStorage.setItem("user", user.id);
                         console.log("You're logged in as user", user.id)
-                        // this.props.history.push("/news");
+                        this.props.history.push("/home");
                     }
                 })
             }

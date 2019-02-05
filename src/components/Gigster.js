@@ -19,25 +19,35 @@ class Gigster extends Component {
     let currentUser = [];
     DataManager.fetchData({
       "dataSet" : "users",
-      "fetchType" : "GET",
-      "dataBaseObject" : "",
-      "embedItem" : ""
+      "fetchType" : "GET"
     })
-    .then(users => {this.setState({users: users})})
+    .then(users => {this.setState({ users })})
     .then(() => {
       let user = this.state.users.find(user => user.id === Number(sessionStorage.getItem("user")))
       currentUser.push(user)
-      this.setState({ currentUser: currentUser })
+      if (currentUser < 1) {
+        return null
+      } else {
+
+        this.setState({ currentUser: currentUser })
+      }
     })
     .then(() => DataManager.fetchData({
       "dataSet" : "artists",
       "fetchType" : "GET",
       "dataBaseObject" : "",
-      "embedItem" : ""
+      "embedItem" : "_embed=artistToSongs"
     }))
-    .then(artists => {
-      // console.log(artists)
-    })
+    .then(artists => {this.setState({ artists })})
+    .then(() => console.log(this.state))
+    .then(() => DataManager.fetchData({
+      "dataSet" : "songs",
+      "fetchType" : "GET",
+      "dataBaseObject" : "",
+      "embedItem" : "_embed=users"
+    }))
+    .then(songs => {this.setState({ songs })})
+
   }
 
 
@@ -79,7 +89,8 @@ componentDidMount() {
       <ApplicationViews
         addUser={this.addUser}
         getAllUsers={this.getAllUsers}
-        checkUserLogin={this.checkUserLogin} />
+        checkUserLogin={this.checkUserLogin}
+        artists={this.state.artists} />
     );
   }
 }

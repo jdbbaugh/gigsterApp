@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Route, Redirect } from "react-router-dom"
 import Login from "./userlogin/Login"
+import Home from "./homepage/Home"
 import Register from "./userlogin/Register"
 
 export default class ApplicationViews extends Component {
@@ -16,6 +17,10 @@ export default class ApplicationViews extends Component {
       addUser={this.props.addUser}
       users={this.props.users}
       getAllUsers={this.props.getAllUsers}/>
+      }}/>
+      <Route path="/home" render={props => {
+    return <Home
+      artists={this.props.artists} />
       }}/>
 </React.Fragment>
     )
