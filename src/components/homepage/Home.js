@@ -7,7 +7,25 @@ import Button from 'react-bootstrap/Button'
 
 
 class MyVerticallyCenteredModal extends Component {
+  state = {
+    "userId": Number(sessionStorage.getItem("user")),
+    "artistName": "",
+    "artistImageUrl": ""
+  }
+
+  handleFieldChange = evt => {
+    const stateToChange = {}
+    stateToChange[evt.target.id] = evt.target.value
+    this.setState(stateToChange)
+}
+
+addNewArticle = evt => {
+  evt.preventDefault()
+  this.props.addArtist().then(() => this.props.onHide)
+}
+
   render() {
+
     return (
       <Modal
         {...this.props}
@@ -21,23 +39,31 @@ class MyVerticallyCenteredModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form>
-  <Form.Group controlId="formBasicEmail">
-    <Form.Label>Artist Image</Form.Label>
-    <Form.Control type="text" placeholder="Artist Image URL" />
-    <Form.Text className="text-muted">
-      Google your artist and link an image of them here.
-    </Form.Text>
-  </Form.Group>
+          <Form>
+            <Form.Group>
+              <Form.Label>Artist Image</Form.Label>
+              <Form.Control
+              type="text" required
+              onChange={this.handleFieldChange}
+              id="artistImageUrl"
+              placeholder="Artist Image URL" />
+              <Form.Text className="text-muted">
+                Google your artist and link an image of them here.
+              </Form.Text>
+            </Form.Group>
 
-  <Form.Group controlId="formBasicPassword">
-    <Form.Label>Artist Name</Form.Label>
-    <Form.Control type="test" placeholder="Enter Artist Name" />
-  </Form.Group>
-  <Button variant="primary" type="button">
-    Submit
-  </Button>
-</Form>
+            <Form.Group>
+              <Form.Label>Artist Name</Form.Label>
+              <Form.Control
+              type="text" required
+              onChange={this.handleFieldChange}
+              id="artistName"
+              placeholder="Enter Artist Name" />
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Submit
+            </Button>
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.onHide}>Close</Button>
