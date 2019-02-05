@@ -21,7 +21,6 @@ class MyVerticallyCenteredModal extends Component {
 
 addNewArtist = evt => {
   evt.preventDefault()
-  console.log("yeahman")
   this.props.addToJson({
     "dataSet" : "artists",
     "fetchType" : "POST",
@@ -88,12 +87,21 @@ export default class Home extends Component {
     super(...args)
     console.log(...args)
 
-    this.state = { modalShow: false };
+    this.state = {
+      modalShow: false,
+      artistIdForEditing: 0
+    };
   }
   render() {
     let modalClose = () => this.setState({ modalShow: false });
     let sessionUserId = Number(sessionStorage.getItem("user"));
     console.log("Home",sessionUserId)
+
+    const artistNameToEdit = (artistId) => {
+      console.log(artistId, sessionUserId)
+      this.setState({artistIdForEditing: artistId})
+
+    }
 
     return (
       <React.Fragment>
@@ -108,7 +116,10 @@ export default class Home extends Component {
           if (artist.userId === sessionUserId) {
             return <ArtistCard
             key={artist.id}
-            artist={artist} />
+            artist={artist}
+            artistNameToEdit={artistNameToEdit}
+            artistIdForEditing={this.state.artistIdForEditing}
+            />
             } else {
               return null
             }
