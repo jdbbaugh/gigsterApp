@@ -20,7 +20,8 @@ export default class ApplicationViews extends Component {
       }}/>
       <Route path="/home" render={props => {
     return <Home
-      artists={this.props.artists} />
+      artists={this.props.artists}
+      addUser={this.props.addUser} />
       }}/>
 </React.Fragment>
     )

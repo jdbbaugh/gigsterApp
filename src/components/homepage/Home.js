@@ -19,9 +19,18 @@ class MyVerticallyCenteredModal extends Component {
     this.setState(stateToChange)
 }
 
-addNewArticle = evt => {
+addNewArtist = evt => {
   evt.preventDefault()
-  this.props.addArtist().then(() => this.props.onHide)
+  console.log("yeahman")
+  this.props.addUser({
+    "dataSet" : "artists",
+    "fetchType" : "POST",
+    "dataBaseObject": {
+      artistName: this.state.artistName,
+      artistImageUrl: this.state.artistImageUrl,
+      userId: this.state.userId
+    }
+  }).then(() => this.props.onHide)
 }
 
   render() {
@@ -39,7 +48,7 @@ addNewArticle = evt => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={this.addNewArtist}>
             <Form.Group>
               <Form.Label>Artist Image</Form.Label>
               <Form.Control
@@ -60,7 +69,7 @@ addNewArticle = evt => {
               id="artistName"
               placeholder="Enter Artist Name" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button onClick={this.props.onHide} variant="primary" type="submit">
               Submit
             </Button>
           </Form>
@@ -92,6 +101,7 @@ export default class Home extends Component {
       <MyVerticallyCenteredModal
           show={this.state.modalShow}
           onHide={modalClose}
+          addUser={this.props.addUser}
         />
       <section className="artists-container">
         {this.props.artists.map( artist =>{
