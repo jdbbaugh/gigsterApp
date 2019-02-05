@@ -22,7 +22,7 @@ class MyVerticallyCenteredModal extends Component {
 addNewArtist = evt => {
   evt.preventDefault()
   console.log("yeahman")
-  this.props.addUser({
+  this.props.addToJson({
     "dataSet" : "artists",
     "fetchType" : "POST",
     "dataBaseObject": {
@@ -101,7 +101,7 @@ export default class Home extends Component {
       <MyVerticallyCenteredModal
           show={this.state.modalShow}
           onHide={modalClose}
-          addUser={this.props.addUser}
+          addToJson={this.props.addToJson}
         />
       <section className="artists-container">
         {this.props.artists.map( artist =>{

@@ -26,7 +26,7 @@ export default class Register extends Component {
           else {
               alert("You're in!")
 
-                this.props.addUser({
+                this.props.addToJson({
                   "dataSet" : "users",
                   "fetchType" : "POST",
                   "dataBaseObject": {

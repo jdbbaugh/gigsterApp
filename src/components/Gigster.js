@@ -79,8 +79,8 @@ componentDidMount() {
 
 
 
-  addUser = user =>
-  DataManager.fetchData(user)
+  addToJson = addThis =>
+  DataManager.fetchData(addThis)
   .then(() => this.populateAppState())
   // .then(()=>this.checkUserLogin(user.username, user.password));
 
@@ -88,7 +88,7 @@ componentDidMount() {
   render() {
     return (
       <ApplicationViews
-        addUser={this.addUser}
+        addToJson={this.addToJson}
         getAllUsers={this.getAllUsers}
         checkUserLogin={this.checkUserLogin}
         artists={this.state.artists} />
