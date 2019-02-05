@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ArtistCard from "./ArtistCard"
+import Button from 'react-bootstrap/Button'
 
 
 export default class Home extends Component {
@@ -8,6 +9,8 @@ export default class Home extends Component {
     console.log(sessionUserId)
 
     return (
+      <React.Fragment>
+      <Button variant="primary" size="lg" block>Add New Artist</Button>
       <section className="artists-container">
         {this.props.artists.map( artist =>{
           if (artist.userId === sessionUserId) {
@@ -19,6 +22,7 @@ export default class Home extends Component {
             }
         })}
         </section>
+        </React.Fragment>
 
     )
   }

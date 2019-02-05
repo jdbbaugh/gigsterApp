@@ -8,11 +8,11 @@ export default class ArtistCard extends Component {
   render() {
     return (
 
-  <Card style={{ width: '18rem' }}>
+  <Card className="artist-specific-container" style={{ width: '18rem' }}>
     <Card.Img variant="top" src={this.props.artist.artistImageUrl} />
     <Card.Body>
       <Card.Title>{this.props.artist.artistName}<a className="edit-name">  editThisName</a></Card.Title>
-      <Button variant="primary">Work Tunes</Button>
+      <Button variant="primary" >Work Tunes</Button>
     </Card.Body>
   </Card>
     )
