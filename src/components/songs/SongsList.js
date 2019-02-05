@@ -1,13 +1,3 @@
-// import React, { Component } from 'react';
-
-// export default class SongsList extends Component {
-//   render() {
-//     let sessionUserId = Number(sessionStorage.getItem("user"));
-//     console.log("SongsList",sessionUserId)
-//     return (
-//       <div>songs whoa</div>
-//     )
-//   }
 // bring in artist identity and then artist list .... with artists list define what songs are attached to them
 // then display those songs to SongCard
 
@@ -16,6 +6,7 @@ import SongCard from "./SongCard"
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { Link } from "react-router-dom"
 
 
 
@@ -122,7 +113,7 @@ export default class Home extends Component {
     let sessionUserId = Number(sessionStorage.getItem("user"));
     console.log("Home",sessionUserId)
 
-    const speciifyArtistIdToEdit = (artistId) => {
+    const speciifySongIdToEdit = (artistId) => {
       console.log(artistId, sessionUserId)
       this.setState({artistIdForEditing: artistId})
 
@@ -131,6 +122,9 @@ export default class Home extends Component {
     return (
       <React.Fragment>
       <Button variant="primary" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Song</Button>
+      <Link to="/home">
+      <Button variant="secondary" size="lg" block>Return to Artist Display</Button>
+      </Link>
       <MyVerticallyCenteredModalSongs
           show={this.state.modalShow}
           onHide={modalClose}
@@ -144,6 +138,7 @@ export default class Home extends Component {
             song={song}
             addToJson={this.props.addToJson}
             artistSelectedByUser={this.props.artistSelectedByUser}
+            speciifySongIdToEdit={speciifySongIdToEdit}
             />
             } else {
               return null
