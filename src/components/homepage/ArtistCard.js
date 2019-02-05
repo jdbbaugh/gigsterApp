@@ -20,6 +20,7 @@ export default class ArtistCard extends Component {
       <ArtistNameSaveEdit
       artist={this.props.artist}
       speciifyArtistIdToEdit={this.props.speciifyArtistIdToEdit}
+      addToJson={this.props.addToJson}
       />
     </Card.Body>
   </Card>

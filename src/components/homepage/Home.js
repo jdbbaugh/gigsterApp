@@ -119,6 +119,7 @@ export default class Home extends Component {
             artist={artist}
             speciifyArtistIdToEdit={speciifyArtistIdToEdit}
             artistIdForEditing={this.state.artistIdForEditing}
+            addToJson={this.props.addToJson}
             />
             } else {
               return null
