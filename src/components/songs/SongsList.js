@@ -1,16 +1,24 @@
+// bring in artist identity and then artist list .... with artists list define what songs are attached to them
+// then display those songs to SongCard
+
 import React, { Component } from 'react';
-import ArtistCard from "./ArtistCard"
+import SongCard from "./SongCard"
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { Link } from "react-router-dom"
 
 
 
-class MyVerticallyCenteredModalArtists extends Component {
+class MyVerticallyCenteredModalSongs extends Component {
   state = {
     "userId": Number(sessionStorage.getItem("user")),
-    "artistName": "",
-    "artistImageUrl": ""
+    "songName": "",
+    "genre": "",
+    "writer": "",
+    "progression": "",
+    "url": "",
+    "notes": ""
   }
 
   handleFieldChange = evt => {
@@ -21,15 +29,15 @@ class MyVerticallyCenteredModalArtists extends Component {
 
 addNewArtist = evt => {
   evt.preventDefault()
-  this.props.addToJson({
-    "dataSet" : "artists",
-    "fetchType" : "POST",
-    "dataBaseObject": {
-      artistName: this.state.artistName,
-      artistImageUrl: this.state.artistImageUrl,
-      userId: this.state.userId
-    }
-  }).then(() => this.props.onHide)
+  // this.props.addToJson({
+  //   "dataSet" : "songs",
+  //   "fetchType" : "POST",
+  //   "dataBaseObject": {
+  //     artistName: this.state.artistName,
+  //     artistImageUrl: this.state.artistImageUrl,
+  //     userId: this.state.userId
+  //   }
+  // }).then(() => this.props.onHide)
 }
 
   render() {
@@ -43,30 +51,39 @@ addNewArtist = evt => {
       >
         <Modal.Header closeButton>
           <Modal.Title id="contained-modal-title-vcenter">
-            Time For Some New Jams!
+            Get this tune ready to go!
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={this.addNewArtist}>
             <Form.Group>
-              <Form.Label>Artist Image</Form.Label>
+              <Form.Label>Song Title</Form.Label>
               <Form.Control
               type="text" required
               onChange={this.handleFieldChange}
               id="artistImageUrl"
-              placeholder="Artist Image URL" />
-              <Form.Text className="text-muted">
-                Google your artist and link an image of them here.
-              </Form.Text>
+              placeholder="Song Title" />
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Artist Name</Form.Label>
+              <Form.Label>Youtube Link</Form.Label>
               <Form.Control
               type="text" required
               onChange={this.handleFieldChange}
               id="artistName"
-              placeholder="Enter Artist Name" />
+              placeholder="Enter Youtube URL" />
+              <Form.Text className="text-muted">
+                Place copy and paste the youtube URL for this song here.
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Genre</Form.Label>
+              <Form.Control
+              type="text" required
+              onChange={this.handleFieldChange}
+              id="artistName"
+              placeholder="Jazz, Rock, Blues....." />
             </Form.Group>
             <Button onClick={this.props.onHide} variant="primary" type="submit">
               Submit
@@ -96,7 +113,7 @@ export default class Home extends Component {
     let sessionUserId = Number(sessionStorage.getItem("user"));
     console.log("Home",sessionUserId)
 
-    const speciifyArtistIdToEdit = (artistId) => {
+    const speciifySongIdToEdit = (artistId) => {
       console.log(artistId, sessionUserId)
       this.setState({artistIdForEditing: artistId})
 
@@ -104,22 +121,24 @@ export default class Home extends Component {
 
     return (
       <React.Fragment>
-      <Button variant="primary" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Artist</Button>
-      <MyVerticallyCenteredModalArtists
+      <Button variant="primary" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Song</Button>
+      <Link to="/home">
+      <Button variant="secondary" size="lg" block>Return to Artist Display</Button>
+      </Link>
+      <MyVerticallyCenteredModalSongs
           show={this.state.modalShow}
           onHide={modalClose}
           addToJson={this.props.addToJson}
         />
       <section className="artists-container">
-        {this.props.artists.map( artist =>{
-          if (artist.userId === sessionUserId) {
-            return <ArtistCard
-            key={artist.id}
-            artist={artist}
-            speciifyArtistIdToEdit={speciifyArtistIdToEdit}
-            artistIdForEditing={this.state.artistIdForEditing}
+        {this.props.songs.map( song =>{
+          if (song.userId === sessionUserId) {
+            return <SongCard
+            key={song.id}
+            song={song}
             addToJson={this.props.addToJson}
             artistSelectedByUser={this.props.artistSelectedByUser}
+            speciifySongIdToEdit={speciifySongIdToEdit}
             />
             } else {
               return null

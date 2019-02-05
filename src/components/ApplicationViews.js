@@ -1,10 +1,20 @@
 import React, { Component } from 'react'
 import { Route, Redirect } from "react-router-dom"
 import Login from "./userlogin/Login"
-import Home from "./homepage/Home"
 import Register from "./userlogin/Register"
+import Home from "./homepage/Home"
+import SongsList from "./songs/SongsList"
 
 export default class ApplicationViews extends Component {
+  state = {
+    selectedArtistForSongsList: 0
+  }
+
+  artistSelectedByUser = selectedArtist => {
+    console.log("But for real Artist is:",selectedArtist);
+    this.setState({selectedArtistForSongsList: selectedArtist})
+  }
+
   render() {
     return (
 <React.Fragment>
@@ -21,7 +31,15 @@ export default class ApplicationViews extends Component {
       <Route path="/home" render={props => {
     return <Home
       artists={this.props.artists}
-      addToJson={this.props.addToJson} />
+      addToJson={this.props.addToJson}
+      artistSelectedByUser={this.artistSelectedByUser} />
+      }}/>
+      <Route path="/songs" render={props => {
+    return <SongsList
+      artists={this.props.artists}
+      songs={this.props.songs}
+      addToJson={this.props.addToJson}
+      selectedArtistForSongsList={this.state.selectedArtistForSongsList} />
       }}/>
 </React.Fragment>
     )
