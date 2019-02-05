@@ -14,13 +14,14 @@ export default class ApplicationViews extends Component {
       }}/>
   <Route path="/register" render={props => {
     return <Register {...props}
-      addUser={this.props.addUser}
+      addToJson={this.props.addToJson}
       users={this.props.users}
       getAllUsers={this.props.getAllUsers}/>
       }}/>
       <Route path="/home" render={props => {
     return <Home
-      artists={this.props.artists} />
+      artists={this.props.artists}
+      addToJson={this.props.addToJson} />
       }}/>
 </React.Fragment>
     )
