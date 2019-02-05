@@ -19,9 +19,7 @@ class Gigster extends Component {
     let currentUser = [];
     DataManager.fetchData({
       "dataSet" : "users",
-      "fetchType" : "GET",
-      "dataBaseObject" : "",
-      "embedItem" : ""
+      "fetchType" : "GET"
     })
     .then(users => {this.setState({ users })})
     .then(() => {
@@ -41,6 +39,7 @@ class Gigster extends Component {
       "embedItem" : "_embed=artistToSongs"
     }))
     .then(artists => {this.setState({ artists })})
+    .then(() => console.log(this.state))
     .then(() => DataManager.fetchData({
       "dataSet" : "songs",
       "fetchType" : "GET",

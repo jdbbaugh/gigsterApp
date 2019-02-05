@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ArtistCard from "./ArtistCard"
+
 
 export default class Home extends Component {
   render() {
@@ -9,7 +11,9 @@ export default class Home extends Component {
       <section className="artists-container">
         {this.props.artists.map( artist =>{
           if (artist.userId === sessionUserId) {
-            return <div key={artist.id}>{artist.artistName}</div>
+            return <ArtistCard
+            key={artist.id}
+            artist={artist} />
             } else {
               return null
             }
