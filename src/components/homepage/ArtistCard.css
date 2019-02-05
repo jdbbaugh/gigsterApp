@@ -4,3 +4,5 @@
 .artist-specific-container {
   margin-top: 5em;
 }
+
+a.edit-name{ cursor: pointer; }

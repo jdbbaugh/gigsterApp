@@ -5,7 +5,10 @@ import "./ArtistCard.css"
 
 
 export default class ArtistCard extends Component {
+
   render() {
+    let sessionUserId = Number(sessionStorage.getItem("user"));
+    console.log("ArtistCard",sessionUserId)
     return (
 
   <Card className="artist-specific-container" style={{ width: '18rem' }}>
