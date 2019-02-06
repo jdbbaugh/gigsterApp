@@ -11,11 +11,17 @@ export default class ApplicationViews extends Component {
   }
 
   artistSelectedByUser = selectedArtist => {
-    console.log("But for real Artist is:",selectedArtist);
+    // console.log("But for real Artist is:",selectedArtist);
     this.setState({selectedArtistForSongsList: selectedArtist})
   }
 
   render() {
+
+    if (this.props.artists.length === 0) {
+      return null
+    }
+
+    // console.log(this.props.artists[0])
     return (
 <React.Fragment>
   <Route exact path="/" render={props => {

@@ -88,8 +88,9 @@ componentDidMount() {
 
   addToJson = addThis =>
   DataManager.fetchData(addThis)
-  .then(() => this.populateAppState())
-  // .then(()=>this.checkUserLogin(user.username, user.password));
+  .then((i) => {
+    this.populateAppState()
+    console.log(i)})// .then(()=>this.checkUserLogin(user.username, user.password));
 
 
   render() {
