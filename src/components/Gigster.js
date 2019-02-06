@@ -88,15 +88,17 @@ componentDidMount() {
 
   addToJson = addThis =>
   DataManager.fetchData(addThis)
-  .then((i) => {
-    this.populateAppState()
-    console.log(i)})// .then(()=>this.checkUserLogin(user.username, user.password));
+  .then(() => this.populateAppState())// .then(()=>this.checkUserLogin(user.username, user.password));
+
+  addNewSongToJson = addThis =>
+  DataManager.fetchData(addThis)
 
 
   render() {
     return (
       <ApplicationViews
         addToJson={this.addToJson}
+        addNewSongToJson={this.addNewSongToJson}
         getAllUsers={this.getAllUsers}
         checkUserLogin={this.checkUserLogin}
         artists={this.state.artists}

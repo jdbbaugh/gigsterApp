@@ -43,6 +43,7 @@ export default class ApplicationViews extends Component {
       <Route path="/songs" render={props => {
     return <SongsList
       artists={this.props.artists}
+      addNewSongToJson={this.props.addNewSongToJson}
       songs={this.props.songs}
       artistToSongs={this.props.artistToSongs}
       addToJson={this.props.addToJson}

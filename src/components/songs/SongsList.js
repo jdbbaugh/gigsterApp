@@ -29,7 +29,7 @@ class MyVerticallyCenteredModalSongs extends Component {
 
 addNewArtist = evt => {
   evt.preventDefault()
-  this.props.addToJson({
+  this.props.addNewSongToJson({
     "dataSet" : "songs",
     "fetchType" : "POST",
     "dataBaseObject": {
@@ -41,19 +41,16 @@ addNewArtist = evt => {
       url: this.state.url,
       notes: this.state.notes,
     }
-  }).then(() => this.artistToSongConundrum())
+  }).then((newSongInfo) => this.artistToSongConundrum(newSongInfo))
   .then(() => this.props.onHide)
 }
 
-artistToSongConundrum = () => {
-  console.log(this.props.songs)
-
-
+artistToSongConundrum = (newSongInfo) => {
   this.props.addToJson({
     "dataSet" : "artistToSongs",
     "fetchType" : "POST",
     "dataBaseObject": {
-      "songId": 10,
+      "songId": newSongInfo.id,
       "artistId": this.props.selectedArtistForSongsList,
       "setId": 0
     }
@@ -158,6 +155,7 @@ export default class Home extends Component {
           show={this.state.modalShow}
           onHide={modalClose}
           songs={this.props.songs}
+          addNewSongToJson={this.props.addNewSongToJson}
           addToJson={this.props.addToJson}
           selectedArtistForSongsList={this.props.selectedArtistForSongsList}
         />
