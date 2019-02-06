@@ -10,10 +10,6 @@ export default class SongCard extends Component {
     if (this.props.artistToSongs.find(
       artistToSong => artistToSong.songId === this.props.song.id && artistToSong.artistId === this.props.selectedArtistForSongsList)) {
         isSpecifiedArtistsSong = true
-
-
-    console.log(isSpecifiedArtistsSong)
-
     return (
       <Card className="artist-specific-container" style={{ width: '18rem' }}>
         <Card.Body>
