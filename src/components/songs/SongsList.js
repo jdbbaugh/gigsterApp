@@ -29,15 +29,32 @@ class MyVerticallyCenteredModalSongs extends Component {
 
 addNewArtist = evt => {
   evt.preventDefault()
-  // this.props.addToJson({
-  //   "dataSet" : "songs",
-  //   "fetchType" : "POST",
-  //   "dataBaseObject": {
-  //     artistName: this.state.artistName,
-  //     artistImageUrl: this.state.artistImageUrl,
-  //     userId: this.state.userId
-  //   }
-  // }).then(() => this.props.onHide)
+  this.props.addNewSongToJson({
+    "dataSet" : "songs",
+    "fetchType" : "POST",
+    "dataBaseObject": {
+      userId: this.state.userId,
+      songName: this.state.songName,
+      genre: this.state.genre,
+      writer: this.state.writer,
+      progression: this.state.progression,
+      url: this.state.url,
+      notes: this.state.notes,
+    }
+  }).then((newSongInfo) => this.artistToSongConundrum(newSongInfo))
+  .then(() => this.props.onHide)
+}
+
+artistToSongConundrum = (newSongInfo) => {
+  this.props.addToJson({
+    "dataSet" : "artistToSongs",
+    "fetchType" : "POST",
+    "dataBaseObject": {
+      "songId": newSongInfo.id,
+      "artistId": this.props.selectedArtistForSongsList,
+      "setId": 0
+    }
+  })
 }
 
   render() {
@@ -61,7 +78,7 @@ addNewArtist = evt => {
               <Form.Control
               type="text" required
               onChange={this.handleFieldChange}
-              id="artistImageUrl"
+              id="songName"
               placeholder="Song Title" />
             </Form.Group>
 
@@ -70,7 +87,7 @@ addNewArtist = evt => {
               <Form.Control
               type="text" required
               onChange={this.handleFieldChange}
-              id="artistName"
+              id="url"
               placeholder="Enter Youtube URL" />
               <Form.Text className="text-muted">
                 Place copy and paste the youtube URL for this song here.
@@ -78,11 +95,20 @@ addNewArtist = evt => {
             </Form.Group>
 
             <Form.Group>
+              <Form.Label>Original Artist</Form.Label>
+              <Form.Control
+              type="text" required
+              onChange={this.handleFieldChange}
+              id="writer"
+              placeholder="Original Artist Or Desired Rendition"/>
+            </Form.Group>
+
+            <Form.Group>
               <Form.Label>Genre</Form.Label>
               <Form.Control
               type="text" required
               onChange={this.handleFieldChange}
-              id="artistName"
+              id="genre"
               placeholder="Jazz, Rock, Blues....." />
             </Form.Group>
             <Button onClick={this.props.onHide} variant="primary" type="submit">
@@ -111,16 +137,13 @@ export default class Home extends Component {
   render() {
     let modalClose = () => this.setState({ modalShow: false });
     let sessionUserId = Number(sessionStorage.getItem("user"));
-    console.log("Home",sessionUserId)
+    // console.log("Home",sessionUserId);
 
     const speciifySongIdToEdit = (artistId) => {
-      console.log(artistId, sessionUserId)
+      // console.log(artistId, sessionUserId);
       this.setState({artistIdForEditing: artistId})
       // this will be to edit stuff in the song specific json so keep it for now
     }
-
-    let songsAssociatedWithArtist = this.props.artistToSongs.filter(artistToSong => artistToSong.artistId === this.props.selectedArtistForSongsList);
-    console.log(songsAssociatedWithArtist)
 
     return (
       <React.Fragment>
@@ -131,7 +154,10 @@ export default class Home extends Component {
       <MyVerticallyCenteredModalSongs
           show={this.state.modalShow}
           onHide={modalClose}
+          songs={this.props.songs}
+          addNewSongToJson={this.props.addNewSongToJson}
           addToJson={this.props.addToJson}
+          selectedArtistForSongsList={this.props.selectedArtistForSongsList}
         />
       <section className="artists-container">
         {this.props.songs.map( song =>{

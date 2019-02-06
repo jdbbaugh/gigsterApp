@@ -9,13 +9,15 @@ import "./ArtistCard.css"
 export default class ArtistCard extends Component {
 
   userSelectedArtist = evt => {
-    console.log("Artist is:",this.props.artist.id)
+    // console.log("Artist is:",this.props.artist.id);
     this.props.artistSelectedByUser(this.props.artist.id)
   }
 
+
+
   render() {
-    let sessionUserId = Number(sessionStorage.getItem("user"));
-    console.log("ArtistCard",sessionUserId)
+    // let sessionUserId = Number(sessionStorage.getItem("user"));
+    // console.log("ArtistCard",sessionUserId);
 
         if (this.props.artistIdForEditing === this.props.artist.id) {
       return(

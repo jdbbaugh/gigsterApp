@@ -94,10 +94,10 @@ export default class Home extends Component {
   render() {
     let modalClose = () => this.setState({ modalShow: false });
     let sessionUserId = Number(sessionStorage.getItem("user"));
-    console.log("Home",sessionUserId)
+    // console.log("Home",sessionUserId);
 
     const speciifyArtistIdToEdit = (artistId) => {
-      console.log(artistId, sessionUserId)
+      // console.log(artistId, sessionUserId);
       this.setState({artistIdForEditing: artistId})
 
     }
