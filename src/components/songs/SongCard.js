@@ -4,11 +4,15 @@ import Button from 'react-bootstrap/Button'
 
 export default class SongCard extends Component {
   render() {
-    console.log(this.props.artistToSongs.find(artistToSong => artistToSong.songId === 4))
-    // console.log(matchArtistToTable)
+    // console.log(this.props.artistToSongs)
 
     let isSpecifiedArtistsSong = false
+    if (this.props.artistToSongs.find(
+      artistToSong => artistToSong.songId === this.props.song.id && artistToSong.artistId === this.props.selectedArtistForSongsList)) {
+        isSpecifiedArtistsSong = true
 
+
+    console.log(isSpecifiedArtistsSong)
 
     return (
       <Card className="artist-specific-container" style={{ width: '18rem' }}>
@@ -23,5 +27,8 @@ export default class SongCard extends Component {
         </Card.Body>
       </Card>
     )
+  } else {
+    return null
+  }
   }
 }
