@@ -4,15 +4,21 @@ import Login from "./userlogin/Login"
 import Register from "./userlogin/Register"
 import Home from "./homepage/Home"
 import SongsList from "./songs/SongsList"
+import SongSpecific from "./songspecific/SongSpecific"
 
 export default class ApplicationViews extends Component {
   state = {
-    selectedArtistForSongsList: 0
+    selectedArtistForSongsList: 0,
+    specificSongForSongSpecific: ""
   }
 
   artistSelectedByUser = selectedArtist => {
     // console.log("But for real Artist is:",selectedArtist);
     this.setState({selectedArtistForSongsList: selectedArtist})
+  }
+
+  specificSongForSongSpecific = selectedSong => {
+    this.setState({selectedArtistForSongsList: selectedSong})
   }
 
   render() {
@@ -34,20 +40,27 @@ export default class ApplicationViews extends Component {
       users={this.props.users}
       getAllUsers={this.props.getAllUsers}/>
       }}/>
-      <Route path="/home" render={props => {
+  <Route path="/home" render={props => {
     return <Home
       artists={this.props.artists}
       addToJson={this.props.addToJson}
       artistSelectedByUser={this.artistSelectedByUser} />
       }}/>
-      <Route path="/songs" render={props => {
+  <Route path="/songs" render={props => {
     return <SongsList
+      {...props}
       artists={this.props.artists}
       addNewSongToJson={this.props.addNewSongToJson}
       songs={this.props.songs}
       artistToSongs={this.props.artistToSongs}
       addToJson={this.props.addToJson}
-      selectedArtistForSongsList={this.state.selectedArtistForSongsList} />
+      selectedArtistForSongsList={this.state.selectedArtistForSongsList}
+      specificSongForSongSpecific={this.specificSongForSongSpecific} />
+      }}/>
+  <Route path="/specificsong" render={props => {
+    return <SongSpecific
+    selectedArtistForSongsList={this.state.selectedArtistForSongsList}
+    songs={this.props.songs} />
       }}/>
 </React.Fragment>
     )

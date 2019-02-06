@@ -134,6 +134,11 @@ export default class Home extends Component {
       artistIdForEditing: 0
     };
   }
+  sendToSongSpecific = (songIdForSecificity) => {
+    // console.log(songIdForSecificity)
+    this.props.specificSongForSongSpecific(songIdForSecificity)
+    this.props.history.push("/specificsong")
+  }
   render() {
     let modalClose = () => this.setState({ modalShow: false });
     let sessionUserId = Number(sessionStorage.getItem("user"));
@@ -164,6 +169,7 @@ export default class Home extends Component {
           if (song.userId === sessionUserId) {
             return <SongCard
             key={song.id}
+            sendToSongSpecific={this.sendToSongSpecific}
             song={song}
             artists={this.props.artists}
             artistToSongs={this.props.artistToSongs}
