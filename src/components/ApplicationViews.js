@@ -4,6 +4,7 @@ import Login from "./userlogin/Login"
 import Register from "./userlogin/Register"
 import Home from "./homepage/Home"
 import SongsList from "./songs/SongsList"
+import SongSpecific from "./songspecific/SongSpecific"
 
 export default class ApplicationViews extends Component {
   state = {
@@ -34,13 +35,13 @@ export default class ApplicationViews extends Component {
       users={this.props.users}
       getAllUsers={this.props.getAllUsers}/>
       }}/>
-      <Route path="/home" render={props => {
+  <Route path="/home" render={props => {
     return <Home
       artists={this.props.artists}
       addToJson={this.props.addToJson}
       artistSelectedByUser={this.artistSelectedByUser} />
       }}/>
-      <Route path="/songs" render={props => {
+  <Route path="/songs" render={props => {
     return <SongsList
       artists={this.props.artists}
       addNewSongToJson={this.props.addNewSongToJson}
@@ -49,6 +50,10 @@ export default class ApplicationViews extends Component {
       addToJson={this.props.addToJson}
       selectedArtistForSongsList={this.state.selectedArtistForSongsList} />
       }}/>
+  <Route path="/specificsong" render={props => {
+    return <SongSpecific />
+      }}/>
+
 </React.Fragment>
     )
   }
