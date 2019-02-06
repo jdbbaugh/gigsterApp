@@ -134,8 +134,9 @@ export default class Home extends Component {
       artistIdForEditing: 0
     };
   }
-  sendToSongSpecific = () => {
-    console.log("shiz")
+  sendToSongSpecific = (songIdForSecificity) => {
+    // console.log(songIdForSecificity)
+    this.props.specificSongForSongSpecific(songIdForSecificity)
     this.props.history.push("/specificsong")
   }
   render() {

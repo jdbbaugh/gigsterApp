@@ -5,8 +5,7 @@ import Button from 'react-bootstrap/Button'
 export default class SongCard extends Component {
 
   toSpecificSong = evt => {
-    console.log("you clicked specificsong")
-    this.props.sendToSongSpecific()
+    this.props.sendToSongSpecific(this.props.song.id)
   }
   render() {
     // console.log(this.props.artistToSongs)

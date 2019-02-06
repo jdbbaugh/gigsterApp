@@ -8,12 +8,17 @@ import SongSpecific from "./songspecific/SongSpecific"
 
 export default class ApplicationViews extends Component {
   state = {
-    selectedArtistForSongsList: 0
+    selectedArtistForSongsList: 0,
+    specificSongForSongSpecific: ""
   }
 
   artistSelectedByUser = selectedArtist => {
     // console.log("But for real Artist is:",selectedArtist);
     this.setState({selectedArtistForSongsList: selectedArtist})
+  }
+
+  specificSongForSongSpecific = selectedSong => {
+    this.setState({selectedArtistForSongsList: selectedSong})
   }
 
   render() {
@@ -49,12 +54,13 @@ export default class ApplicationViews extends Component {
       songs={this.props.songs}
       artistToSongs={this.props.artistToSongs}
       addToJson={this.props.addToJson}
-      selectedArtistForSongsList={this.state.selectedArtistForSongsList} />
+      selectedArtistForSongsList={this.state.selectedArtistForSongsList}
+      specificSongForSongSpecific={this.specificSongForSongSpecific} />
       }}/>
   <Route path="/specificsong" render={props => {
-    return <SongSpecific />
+    return <SongSpecific
+    selectedArtistForSongsList={this.state.selectedArtistForSongsList} />
       }}/>
-
 </React.Fragment>
     )
   }
