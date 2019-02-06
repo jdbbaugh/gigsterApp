@@ -14,8 +14,11 @@ export default class SongSpecific extends Component {
         <h2>{chosenSongForViewing.songName}</h2>
         <p>{chosenSongForViewing.writer}<br></br>-{chosenSongForViewing.genre}</p>
         <ReactPlayer url={chosenSongForViewing.url}
-            playing
             controls />
+      <section>
+        <h3>Notes:<a className="edit-name">   editNotes</a></h3>
+        <p>{chosenSongForViewing.notes}</p>
+      </section>
 
         </div>
     )
