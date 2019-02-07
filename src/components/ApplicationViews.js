@@ -8,7 +8,7 @@ import SongSpecific from "./songspecific/SongSpecific"
 
 export default class ApplicationViews extends Component {
   state = {
-    selectedArtistForSongsList: 0,
+    selectedArtistForSongsList: [],
     specificSongForSongSpecific: ""
   }
 
@@ -60,6 +60,7 @@ export default class ApplicationViews extends Component {
   <Route path="/specificsong" render={props => {
     return <SongSpecific
     selectedArtistForSongsList={this.state.selectedArtistForSongsList}
+    addNewSongToJson={this.props.addNewSongToJson}
     songs={this.props.songs} />
       }}/>
 </React.Fragment>

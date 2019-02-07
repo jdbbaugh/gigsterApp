@@ -5,19 +5,19 @@ import ReactPlayer from 'react-player'
 
 export default class SongSpecific extends Component {
   render() {
-    const chosenSongForViewing = this.props.songs.find(song => song.id === this.props.selectedArtistForSongsList);
+
     return (
       <div>
       <Link to="/home">
       <Button variant="secondary" size="lg" block>Return to Artist Display</Button>
       </Link>
-        <h2>{chosenSongForViewing.songName}</h2>
-        <p>{chosenSongForViewing.writer}<br></br>-{chosenSongForViewing.genre}</p>
-        <ReactPlayer url={chosenSongForViewing.url}
+        <h2>{this.props.selectedArtistForSongsList.songName}</h2>
+        <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
+        <ReactPlayer url={this.props.selectedArtistForSongsList.url}
             controls />
       <section>
         <h3>Notes:<a className="edit-name">   editNotes</a></h3>
-        <p>{chosenSongForViewing.notes}</p>
+        <p>{this.props.selectedArtistForSongsList.notes}</p>
       </section>
 
         </div>
