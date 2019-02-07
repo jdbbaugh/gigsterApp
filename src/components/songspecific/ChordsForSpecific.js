@@ -43,7 +43,7 @@ export default class ChordsForSpecific extends Component {
   render() {
     return (
       <section className="progressionForSong">
-        <h4>Chord Chart:<a className="edit-name" onClick={this.progressionEditing}>   editChart</a></h4>
+      {this.props.selectedArtistForSongsList.progression === "" ? <Button onClick={this.progressionEditing} variant="dark">Add Chords</Button>: <h4>Chord Chart:<a className="edit-name" onClick={this.progressionEditing}>   editChart</a></h4>}
         {!this.state.editProgression ? <h2>{this.props.selectedArtistForSongsList.progression}</h2> :
           <InputGroup>
             <InputGroup.Prepend>
