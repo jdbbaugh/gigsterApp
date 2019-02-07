@@ -16,6 +16,10 @@ export default class SongSpecific extends Component {
     this.setState(stateToChange)
   }
 
+  youtubeURLchange = () => {
+    console.log("change dat vid")
+  }
+
   setNoteEditing = () => {
     this.setState({editNote: true})
   }
@@ -59,7 +63,7 @@ export default class SongSpecific extends Component {
         </Link>
           <h2>{this.props.selectedArtistForSongsList.songName}</h2>
           <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
-          <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
+          <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList} />
         <section>
           <h3>Notes:<a className="edit-name">   editNotes</a></h3>
           <textarea type="text" value={this.state.notes} onChange={this.handleFieldChange} id="notes"/>
@@ -75,6 +79,7 @@ export default class SongSpecific extends Component {
           <h2>{this.props.selectedArtistForSongsList.songName}</h2>
           <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
           <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
+          <Button variant="secondary" onClick={this.youtubeURLchange}>Change Video Link</Button>
         <section>
           <h3>Notes:<a onClick={this.setNoteEditing} className="edit-name">   editNotes</a></h3>
           <p>{this.props.selectedArtistForSongsList.notes}</p>
