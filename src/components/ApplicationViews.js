@@ -44,7 +44,10 @@ let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => a
       "userId": deleteSongFromArtistToSong.id
     }
 });
+  }
 
+  deleteArtistFromJson = (toDelete) => {
+    console.log("deleting Artist", toDelete)
   }
 
   render() {
@@ -70,7 +73,8 @@ let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => a
     return <Home
       artists={this.props.artists}
       addToJson={this.props.addToJson}
-      artistSelectedByUser={this.artistSelectedByUser} />
+      artistSelectedByUser={this.artistSelectedByUser}
+      deleteArtistFromJson={this.deleteArtistFromJson} />
       }}/>
   <Route path="/songs" render={props => {
     return <SongsList

@@ -14,9 +14,10 @@ export default class ArtistCard extends Component {
     this.props.artistSelectedByUser(this.props.artist.id)
   }
 
-  artistToDelete = (evt) => {
+  artistToDelete = evt => {
     evt.preventDefault();
     console.log("NOOOOOOOO!")
+    this.props.deleteArtistFromJson(this.props.artist.id)
   }
 
   render() {

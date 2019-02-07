@@ -120,6 +120,7 @@ export default class Home extends Component {
             artistIdForEditing={this.state.artistIdForEditing}
             addToJson={this.props.addToJson}
             artistSelectedByUser={this.props.artistSelectedByUser}
+            deleteArtistFromJson={this.props.deleteArtistFromJson}
             />
             } else {
               return null
