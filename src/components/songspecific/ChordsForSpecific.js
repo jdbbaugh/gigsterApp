@@ -5,7 +5,14 @@ import FormControl from 'react-bootstrap/FormControl'
 
 export default class ChordsForSpecific extends Component {
   state = {
-    editProgression: false
+    editProgression: false,
+    progression: this.props.selectedArtistForSongsList.progression
+  }
+
+  handleFieldChange = evt => {
+    const stateToChange = {}
+    stateToChange[evt.target.id] = evt.target.value
+    this.setState(stateToChange)
   }
 
   progressionEditing = () => {
@@ -25,7 +32,7 @@ export default class ChordsForSpecific extends Component {
             <InputGroup.Prepend>
               <Button variant="danger" onClick={this.saveProgression}>Save Changes</Button>
             </InputGroup.Prepend>
-            <FormControl as="textarea" aria-label="With textarea" />
+            <FormControl as="textarea" id="progression" value={this.props.selectedArtistForSongsList.progression} onChange={this.handleFieldChange} aria-label="With textarea" />
           </InputGroup>}
       </section>
     )
