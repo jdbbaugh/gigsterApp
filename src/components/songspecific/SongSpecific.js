@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 export default class SongSpecific extends Component {
   state = {
     editNote: false,
-    notes: ""
+    notes: this.props.selectedArtistForSongsList.notes,
   }
 
   handleFieldChange = evt => {
@@ -62,7 +62,7 @@ export default class SongSpecific extends Component {
           <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
         <section>
           <h3>Notes:<a className="edit-name">   editNotes</a></h3>
-          <textarea type="text" onChange={this.handleFieldChange} id="notes"/>
+          <textarea type="text" value={this.state.notes} onChange={this.handleFieldChange} id="notes"/>
           <Button onClick={this.saveNewNotes} variant="dark">Save</Button>
         </section>
       </div>
