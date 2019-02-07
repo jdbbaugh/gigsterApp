@@ -57,22 +57,6 @@ export default class SongSpecific extends Component {
     this.setState({editNote: false})
   }
   render() {
-    if (this.state.editNote) {
-    return (
-      <div>
-        <Link to="/home">
-        <Button variant="secondary" size="lg" block>Return to Artist Display</Button>
-        </Link>
-          <h2>{this.props.selectedArtistForSongsList.songName}</h2>
-          <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
-          <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList} />
-        <section>
-          <h3>Notes:<a className="edit-name">   editNotes</a></h3>
-          <textarea type="text" value={this.state.notes} onChange={this.handleFieldChange} id="notes"/>
-          <Button onClick={this.saveNewNotes} variant="dark">Save</Button>
-        </section>
-      </div>
-    )}
     return (
       <div>
         <Link to="/home">
@@ -81,7 +65,7 @@ export default class SongSpecific extends Component {
           <h2>{this.props.selectedArtistForSongsList.songName}</h2>
           <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
           <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
-          <Button variant="secondary" onClick={this.youtubeURLchange}>Change Video Link</Button>
+          {this.state.editUrl ? <Button variant="danger">Save New Youtube URL</Button> : <Button variant="secondary" onClick={this.youtubeURLchange}>Change Video Link</Button>}
           {this.state.editUrl ? <input/> : null}
         <section>
           <h3>Notes:<a onClick={this.setNoteEditing} className="edit-name">   editNotes</a></h3>
