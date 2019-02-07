@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import YoutubeHolder from './YoutubeHolder'
+import ChordsForSpecific from './ChordsForSpecific'
 import Button from 'react-bootstrap/Button'
 import { Link } from "react-router-dom"
 
@@ -82,7 +83,11 @@ export default class SongSpecific extends Component {
           <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
           {this.state.editUrl ? <Button onClick={this.youtubeSaveUrl} variant="danger">Save New Youtube URL</Button> : <Button variant="secondary" onClick={this.youtubeURLchange}>Change Video Link</Button>}
           {this.state.editUrl ? <input type="text" id="url" value={this.state.url} className="youtube-url-new" onChange={this.handleFieldChange}/> : null}
-        <section>
+          <ChordsForSpecific
+          selectedArtistForSongsList={this.props.selectedArtistForSongsList}
+          addToJson={this.props.addToJson}
+          specificSongForSongSpecific={this.props.specificSongForSongSpecific} />
+        <section className="notesForSong">
           <h3>Notes:<a onClick={this.setNoteEditing} className="edit-name">   editNotes</a></h3>
           {this.state.editNote ? <textarea type="text" value={this.state.notes} onChange={this.handleFieldChange} id="notes"/> : <p>{this.props.selectedArtistForSongsList.notes}</p>}
           {this.state.editNote ? <Button onClick={this.saveNewNotes} variant="dark">Save</Button> : null}
