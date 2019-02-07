@@ -7,7 +7,9 @@ import { Link } from "react-router-dom"
 export default class SongSpecific extends Component {
   state = {
     editNote: false,
+    editUrl: false,
     notes: this.props.selectedArtistForSongsList.notes,
+    url: this.props.selectedArtistForSongsList.url
   }
 
   handleFieldChange = evt => {
@@ -16,26 +18,39 @@ export default class SongSpecific extends Component {
     this.setState(stateToChange)
   }
 
+  youtubeURLchange = () => {
+    this.setState({editUrl: true})
+  }
+
+
   setNoteEditing = () => {
     this.setState({editNote: true})
   }
-  saveNewNotes = () => {
-    console.log("saving")
-    this.props.addToJson({
-    "putId" :this.props.selectedArtistForSongsList.id,
-    "dataSet" : "songs",
-    "fetchType" : "PUT",
-    "dataBaseObject" : {
+
+  youtubeSaveUrl = () => {
+    console.log("youSaved")
+    let songUpdate = {
       "id" : this.props.selectedArtistForSongsList.id,
       userId: this.props.selectedArtistForSongsList.userId,
       songName: this.props.selectedArtistForSongsList.songName,
       genre: this.props.selectedArtistForSongsList.genre,
       writer: this.props.selectedArtistForSongsList.writer,
       progression: this.props.selectedArtistForSongsList.progression,
-      url: this.props.selectedArtistForSongsList.url,
-      "notes": this.state.notes
+      url: this.state.url,
+      "notes": this.props.selectedArtistForSongsList.notes,
     }
+    this.props.addToJson({
+    "putId" :this.props.selectedArtistForSongsList.id,
+    "dataSet" : "songs",
+    "fetchType" : "PUT",
+    "dataBaseObject" : songUpdate
     });
+    this.props.specificSongForSongSpecific(songUpdate)
+    this.setState({editUrl: false})
+  }
+
+  saveNewNotes = () => {
+    console.log("saving")
     let songUpdate = {
       "id" : this.props.selectedArtistForSongsList.id,
       userId: this.props.selectedArtistForSongsList.userId,
@@ -46,12 +61,17 @@ export default class SongSpecific extends Component {
       url: this.props.selectedArtistForSongsList.url,
       "notes": this.state.notes
     }
+    this.props.addToJson({
+    "putId" :this.props.selectedArtistForSongsList.id,
+    "dataSet" : "songs",
+    "fetchType" : "PUT",
+    "dataBaseObject" : songUpdate
+    });
 
     this.props.specificSongForSongSpecific(songUpdate)
     this.setState({editNote: false})
   }
   render() {
-    if (this.state.editNote) {
     return (
       <div>
         <Link to="/home">
@@ -60,24 +80,12 @@ export default class SongSpecific extends Component {
           <h2>{this.props.selectedArtistForSongsList.songName}</h2>
           <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
           <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
-        <section>
-          <h3>Notes:<a className="edit-name">   editNotes</a></h3>
-          <textarea type="text" value={this.state.notes} onChange={this.handleFieldChange} id="notes"/>
-          <Button onClick={this.saveNewNotes} variant="dark">Save</Button>
-        </section>
-      </div>
-    )}
-    return (
-      <div>
-        <Link to="/home">
-        <Button variant="secondary" size="lg" block>Return to Artist Display</Button>
-        </Link>
-          <h2>{this.props.selectedArtistForSongsList.songName}</h2>
-          <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
-          <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
+          {this.state.editUrl ? <Button onClick={this.youtubeSaveUrl} variant="danger">Save New Youtube URL</Button> : <Button variant="secondary" onClick={this.youtubeURLchange}>Change Video Link</Button>}
+          {this.state.editUrl ? <input type="text" id="url" value={this.state.url} className="youtube-url-new" onChange={this.handleFieldChange}/> : null}
         <section>
           <h3>Notes:<a onClick={this.setNoteEditing} className="edit-name">   editNotes</a></h3>
-          <p>{this.props.selectedArtistForSongsList.notes}</p>
+          {this.state.editNote ? <textarea type="text" value={this.state.notes} onChange={this.handleFieldChange} id="notes"/> : <p>{this.props.selectedArtistForSongsList.notes}</p>}
+          {this.state.editNote ? <Button onClick={this.saveNewNotes} variant="dark">Save</Button> : null}
         </section>
       </div>
     )
