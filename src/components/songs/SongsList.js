@@ -176,6 +176,7 @@ export default class Home extends Component {
             addToJson={this.props.addToJson}
             speciifySongIdToEdit={speciifySongIdToEdit}
             selectedArtistForSongsList={this.props.selectedArtistForSongsList}
+            deleteSongFromJson={this.props.deleteSongFromJson}
             />
             } else {
               return null

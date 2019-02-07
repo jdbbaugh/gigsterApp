@@ -21,6 +21,39 @@ export default class ApplicationViews extends Component {
     this.setState({selectedArtistForSongsList: selectedSong})
   }
 
+  deleteSongFromJson = (toDelete) => {
+    console.log("deleting", toDelete)
+    this.props.addToJson({
+
+    "deleteId" : toDelete,
+    "dataSet" : "songs",
+    "fetchType" : "DELETE"
+}).then(() => {
+
+let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => artistToSong.songId === toDelete);
+// console.log("artistToSong", deleteSongFromArtistToSong.songId, deleteSongFromArtistToSong.id );
+    this.props.addToJson({
+
+    "deleteId" : deleteSongFromArtistToSong.id,
+    "dataSet" : "artistToSongs",
+    "fetchType" : "DELETE"
+});
+})
+  }
+
+  deleteArtistFromJson = (toDelete) => {
+    console.log("deleting Artist", toDelete);
+    toDelete.artistToSongs.forEach(artistToSong => {
+      this.deleteSongFromJson(artistToSong.songId);
+    })
+    this.props.addToJson({
+
+      "deleteId" : toDelete.id,
+      "dataSet" : "artists",
+      "fetchType" : "DELETE"
+  });
+  }
+
   render() {
 
     if (this.props.artists.length === 0) {
@@ -44,7 +77,8 @@ export default class ApplicationViews extends Component {
     return <Home
       artists={this.props.artists}
       addToJson={this.props.addToJson}
-      artistSelectedByUser={this.artistSelectedByUser} />
+      artistSelectedByUser={this.artistSelectedByUser}
+      deleteArtistFromJson={this.deleteArtistFromJson} />
       }}/>
   <Route path="/songs" render={props => {
     return <SongsList
@@ -55,7 +89,8 @@ export default class ApplicationViews extends Component {
       artistToSongs={this.props.artistToSongs}
       addToJson={this.props.addToJson}
       selectedArtistForSongsList={this.state.selectedArtistForSongsList}
-      specificSongForSongSpecific={this.specificSongForSongSpecific} />
+      specificSongForSongSpecific={this.specificSongForSongSpecific}
+      deleteSongFromJson={this.deleteSongFromJson} />
       }}/>
   <Route path="/specificsong" render={props => {
     return <SongSpecific
