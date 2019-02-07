@@ -10,10 +10,14 @@ export default class ArtistCard extends Component {
 
   userSelectedArtist = evt => {
     // console.log("Artist is:",this.props.artist.id);
+
     this.props.artistSelectedByUser(this.props.artist.id)
   }
 
-
+  artistToDelete = (evt) => {
+    evt.preventDefault();
+    console.log("NOOOOOOOO!")
+  }
 
   render() {
     // let sessionUserId = Number(sessionStorage.getItem("user"));
@@ -45,7 +49,7 @@ export default class ArtistCard extends Component {
               onClick={this.userSelectedArtist}>
                 Work Tunes
             </Button>
-            <Button variant="outline-danger">Delete Artist</Button>
+            <Button variant="outline-danger" onClick={this.artistToDelete}>Delete Artist</Button>
           </Link>
         </Card.Body>
       </Card>
