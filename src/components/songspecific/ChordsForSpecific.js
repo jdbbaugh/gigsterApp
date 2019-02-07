@@ -21,6 +21,23 @@ export default class ChordsForSpecific extends Component {
 
   saveProgression = () => {
     console.log('clickity')
+    let songUpdate = {
+      "id" : this.props.selectedArtistForSongsList.id,
+      userId: this.props.selectedArtistForSongsList.userId,
+      songName: this.props.selectedArtistForSongsList.songName,
+      genre: this.props.selectedArtistForSongsList.genre,
+      writer: this.props.selectedArtistForSongsList.writer,
+      progression: this.state.progression,
+      url: this.props.selectedArtistForSongsList.url,
+      "notes": this.props.selectedArtistForSongsList.notes
+    }
+    this.props.addToJson({
+      "putId" :this.props.selectedArtistForSongsList.id,
+      "dataSet" : "songs",
+      "fetchType" : "PUT",
+      "dataBaseObject" : songUpdate
+      });
+    this.props.specificSongForSongSpecific(songUpdate)
     this.setState({editProgression: false})
   }
   render() {
@@ -32,7 +49,7 @@ export default class ChordsForSpecific extends Component {
             <InputGroup.Prepend>
               <Button variant="danger" onClick={this.saveProgression}>Save Changes</Button>
             </InputGroup.Prepend>
-            <FormControl as="textarea" id="progression" value={this.props.selectedArtistForSongsList.progression} onChange={this.handleFieldChange} aria-label="With textarea" />
+            <FormControl as="textarea" id="progression" value={this.state.progression} onChange={this.handleFieldChange} aria-label="With textarea" />
           </InputGroup>}
       </section>
     )
