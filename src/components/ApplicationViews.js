@@ -31,7 +31,19 @@ export default class ApplicationViews extends Component {
     "dataBaseObject" : {
       "userId": toDelete
     }
-})
+});
+
+let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => artistToSong.songId === toDelete);
+// console.log("artistToSong", deleteSongFromArtistToSong.songId, deleteSongFromArtistToSong.id );
+    this.props.addToJson({
+
+    "deleteId" : deleteSongFromArtistToSong.id,
+    "dataSet" : "artistToSongs",
+    "fetchType" : "DELETE",
+    "dataBaseObject" : {
+      "userId": deleteSongFromArtistToSong.id
+    }
+});
 
   }
 
