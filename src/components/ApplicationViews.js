@@ -21,6 +21,20 @@ export default class ApplicationViews extends Component {
     this.setState({selectedArtistForSongsList: selectedSong})
   }
 
+  deleteSongFromJson = (toDelete) => {
+    console.log("deleting", toDelete)
+    this.props.addToJson({
+
+    "deleteId" : toDelete,
+    "dataSet" : "songs",
+    "fetchType" : "DELETE",
+    "dataBaseObject" : {
+      "userId": toDelete
+    }
+})
+
+  }
+
   render() {
 
     if (this.props.artists.length === 0) {
@@ -55,7 +69,8 @@ export default class ApplicationViews extends Component {
       artistToSongs={this.props.artistToSongs}
       addToJson={this.props.addToJson}
       selectedArtistForSongsList={this.state.selectedArtistForSongsList}
-      specificSongForSongSpecific={this.specificSongForSongSpecific} />
+      specificSongForSongSpecific={this.specificSongForSongSpecific}
+      deleteSongFromJson={this.deleteSongFromJson} />
       }}/>
   <Route path="/specificsong" render={props => {
     return <SongSpecific

@@ -45,6 +45,7 @@ export default class ArtistCard extends Component {
               onClick={this.userSelectedArtist}>
                 Work Tunes
             </Button>
+            <Button variant="outline-danger">Delete Artist</Button>
           </Link>
         </Card.Body>
       </Card>

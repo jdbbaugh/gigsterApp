@@ -7,6 +7,10 @@ export default class SongCard extends Component {
   toSpecificSong = evt => {
     this.props.sendToSongSpecific(this.props.song)
   }
+songToDelete = () => {
+  this.props.deleteSongFromJson(this.props.song.id)
+}
+
   render() {
     // console.log(this.props.artistToSongs)
 
@@ -21,6 +25,7 @@ export default class SongCard extends Component {
               variant="primary">
                 Work This Song
             </Button>
+            <Button variant="outline-danger" onClick={this.songToDelete}>Delete Song</Button>
         </Card.Body>
       </Card>
     )
