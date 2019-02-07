@@ -7,7 +7,9 @@ import { Link } from "react-router-dom"
 export default class SongSpecific extends Component {
   state = {
     editNote: false,
+    editUrl: false,
     notes: this.props.selectedArtistForSongsList.notes,
+    url: this.props.selectedArtistForSongsList.url
   }
 
   handleFieldChange = evt => {
@@ -17,7 +19,7 @@ export default class SongSpecific extends Component {
   }
 
   youtubeURLchange = () => {
-    console.log("change dat vid")
+    this.setState({editUrl: true})
   }
 
   setNoteEditing = () => {
@@ -80,9 +82,11 @@ export default class SongSpecific extends Component {
           <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
           <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
           <Button variant="secondary" onClick={this.youtubeURLchange}>Change Video Link</Button>
+          {this.state.editUrl ? <input/> : null}
         <section>
           <h3>Notes:<a onClick={this.setNoteEditing} className="edit-name">   editNotes</a></h3>
-          <p>{this.props.selectedArtistForSongsList.notes}</p>
+          {this.state.editNote ? <textarea type="text" value={this.state.notes} onChange={this.handleFieldChange} id="notes"/> : <p>{this.props.selectedArtistForSongsList.notes}</p>}
+          {this.state.editNote ? <Button onClick={this.saveNewNotes} variant="dark">Save</Button> : null}
         </section>
       </div>
     )
