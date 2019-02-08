@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ArtistCard from "./ArtistCard"
+import { Link } from "react-router-dom"
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -105,6 +106,9 @@ export default class Home extends Component {
     return (
       <React.Fragment>
       <Button variant="primary" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Artist</Button>
+      <Link to="/">
+      <Button variant="secondary" size="lg" block>LogOut</Button>
+      </Link>
       <MyVerticallyCenteredModalArtists
           show={this.state.modalShow}
           onHide={modalClose}

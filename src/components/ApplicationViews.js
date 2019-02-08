@@ -12,6 +12,8 @@ export default class ApplicationViews extends Component {
     specificSongForSongSpecific: ""
   }
 
+  isAuthenticated = () => sessionStorage.getItem("user") !== null
+
   artistSelectedByUser = selectedArtist => {
     // console.log("But for real Artist is:",selectedArtist);
     this.setState({selectedArtistForSongsList: selectedArtist})
@@ -54,13 +56,13 @@ let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => a
   });
   }
 
+
+
   render() {
 
     if (this.props.artists.length === 0) {
       return null
     }
-
-    // console.log(this.props.artists[0])
     return (
 <React.Fragment>
   <Route exact path="/" render={props => {
@@ -74,13 +76,17 @@ let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => a
       getAllUsers={this.props.getAllUsers}/>
       }}/>
   <Route path="/home" render={props => {
+    if (this.isAuthenticated()) {
     return <Home
       artists={this.props.artists}
       addToJson={this.props.addToJson}
       artistSelectedByUser={this.artistSelectedByUser}
       deleteArtistFromJson={this.deleteArtistFromJson} />
-      }}/>
+    } else {
+      return <Redirect to='/' />
+    }}}/>
   <Route path="/songs" render={props => {
+    if (this.isAuthenticated()) {
     return <SongsList
       {...props}
       artists={this.props.artists}
@@ -91,14 +97,19 @@ let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => a
       selectedArtistForSongsList={this.state.selectedArtistForSongsList}
       specificSongForSongSpecific={this.specificSongForSongSpecific}
       deleteSongFromJson={this.deleteSongFromJson} />
-      }}/>
+    } else {
+      return <Redirect to='/' />
+    }}}/>
   <Route path="/specificsong" render={props => {
+    if (this.isAuthenticated()) {
     return <SongSpecific
     selectedArtistForSongsList={this.state.selectedArtistForSongsList}
     specificSongForSongSpecific={this.specificSongForSongSpecific}
     addToJson={this.props.addToJson}
     songs={this.props.songs} />
-      }}/>
+  } else {
+      return <Redirect to='/' />
+    }}}/>
 </React.Fragment>
     )
   }
