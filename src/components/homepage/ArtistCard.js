@@ -46,11 +46,11 @@ export default class ArtistCard extends Component {
             className="edit-name">  editThisName</a></Card.Title>
           <Link to="/songs">
             <Button
-              variant="primary"
+              variant="dark"
               onClick={this.userSelectedArtist}>
                 Work Tunes
             </Button>
-            <Button variant="outline-danger" onClick={this.artistToDelete}>Delete Artist</Button>
+            <Button variant="outline-secondary" onClick={this.artistToDelete}>Delete Artist</Button>
           </Link>
         </Card.Body>
       </Card>

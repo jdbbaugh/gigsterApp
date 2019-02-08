@@ -76,7 +76,7 @@ export default class SongSpecific extends Component {
     return (
       <div>
         <Link to="/home">
-          <Button variant="secondary" size="lg">Return to Artist Display</Button>
+          <Button variant="secondary" size="lg">Return to All Artists</Button>
         </Link>
         <Link to="/songs">
           <Button variant="outline-dark" size="lg">Return to Artist Library</Button>

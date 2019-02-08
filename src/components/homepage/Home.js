@@ -105,7 +105,7 @@ export default class Home extends Component {
 
     return (
       <React.Fragment>
-      <Button variant="primary" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Artist</Button>
+      <Button variant="dark" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Artist</Button>
       <Link to="/">
       <Button variant="secondary" size="lg" block>LogOut</Button>
       </Link>
