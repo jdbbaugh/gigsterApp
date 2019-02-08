@@ -58,6 +58,7 @@ this.props.addToJson({
 
 
   render() {
+    console.log("Sets top of Appview",this.props.sets)
 
     if (this.props.artists.length === 0) {
       return null

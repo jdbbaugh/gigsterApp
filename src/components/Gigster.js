@@ -54,6 +54,13 @@ class Gigster extends Component {
       "embedItem" : "_embed=artists"
     }))
     .then(artistToSongs => {this.setState({ artistToSongs })})
+    .then(() => DataManager.fetchData({
+      "dataSet" : "sets",
+      "fetchType" : "GET",
+      "dataBaseObject" : "",
+      "embedItem" : "_embed=artistToSongs"
+    }))
+    .then(sets => {this.setState({ sets })})
 
   }
 
@@ -103,6 +110,7 @@ componentDidMount() {
         checkUserLogin={this.checkUserLogin}
         artists={this.state.artists}
         artistToSongs={this.state.artistToSongs}
+        sets={this.state.sets}
         songs={this.state.songs} />
     );
   }

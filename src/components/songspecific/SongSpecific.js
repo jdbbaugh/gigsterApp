@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import YoutubeHolder from './YoutubeHolder'
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
 import ChordsForSpecific from './ChordsForSpecific'
 import Button from 'react-bootstrap/Button'
 import { Link } from "react-router-dom"
@@ -95,12 +97,19 @@ export default class SongSpecific extends Component {
           specificSongForSongSpecific={this.props.specificSongForSongSpecific} />
         <section className="notesForSong">
           <h3>Notes:
-            <p href="#" onClick={this.setNoteEditing} className="edit-name">   editNotes
+            <p onClick={this.setNoteEditing} className="edit-name">   editNotes
             </p>
           </h3>
-          {this.state.editNote ? <textarea type="text" value={this.state.notes} onChange={this.handleFieldChange} id="notes"/> : <p>{this.props.selectedArtistForSongsList.notes}</p>}
-          {this.state.editNote ? <Button onClick={this.saveNewNotes} variant="dark">Save</Button> : null}
+          {this.state.editNote ? <InputGroup>
+            <InputGroup.Prepend>
+              <Button variant="dark" onClick={this.saveNewNotes}>Save Changes</Button>
+            </InputGroup.Prepend>
+            <FormControl as="textarea" id="notes" value={this.state.notes} onChange={this.handleFieldChange} aria-label="With textarea" />
+          </InputGroup> : <p>{this.props.selectedArtistForSongsList.notes}</p>}
         </section>
+
+
+
       </div>
     )
   }

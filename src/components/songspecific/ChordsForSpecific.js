@@ -52,7 +52,7 @@ export default class ChordsForSpecific extends Component {
         {!this.state.editProgression ? <h2>{this.props.selectedArtistForSongsList.progression}</h2> :
           <InputGroup>
             <InputGroup.Prepend>
-              <Button variant="danger" onClick={this.saveProgression}>Save Changes</Button>
+              <Button variant="dark" onClick={this.saveProgression}>Save Changes</Button>
             </InputGroup.Prepend>
             <FormControl as="textarea" id="progression" value={this.state.progression} onChange={this.handleFieldChange} aria-label="With textarea" />
           </InputGroup>}
