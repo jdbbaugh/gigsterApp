@@ -3,6 +3,7 @@
 
 import React, { Component } from 'react';
 import SongCard from "./SongCard"
+import Setlist from '../setlist/Setlist'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -111,13 +112,13 @@ artistToSongConundrum = (newSongInfo) => {
               id="genre"
               placeholder="Jazz, Rock, Blues....." />
             </Form.Group>
-            <Button onClick={this.props.onHide} variant="primary" type="submit">
+            <Button onClick={this.props.onHide} variant="dark" type="submit">
               Submit
             </Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
+          <Button onClick={this.props.onHide} variant="outline-dark">Close</Button>
         </Modal.Footer>
       </Modal>
     );
@@ -152,37 +153,40 @@ export default class Home extends Component {
 
     return (
       <React.Fragment>
-      <Button variant="primary" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Song</Button>
-      <Link to="/home">
-      <Button variant="secondary" size="lg" block>Return to Artist Display</Button>
-      </Link>
-      <MyVerticallyCenteredModalSongs
-          show={this.state.modalShow}
-          onHide={modalClose}
-          songs={this.props.songs}
-          addNewSongToJson={this.props.addNewSongToJson}
-          addToJson={this.props.addToJson}
-          selectedArtistForSongsList={this.props.selectedArtistForSongsList}
-        />
-      <section className="artists-container">
-        {this.props.songs.map( song =>{
-          if (song.userId === sessionUserId) {
-            return <SongCard
-            key={song.id}
-            sendToSongSpecific={this.sendToSongSpecific}
-            song={song}
-            artists={this.props.artists}
-            artistToSongs={this.props.artistToSongs}
+        <Button variant="dark" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Song</Button>
+        <Link to="/home">
+          <Button variant="secondary" size="lg" block>Return to All Artists</Button>
+        </Link>
+
+        <Setlist />
+
+        <MyVerticallyCenteredModalSongs
+            show={this.state.modalShow}
+            onHide={modalClose}
+            songs={this.props.songs}
+            addNewSongToJson={this.props.addNewSongToJson}
             addToJson={this.props.addToJson}
-            speciifySongIdToEdit={speciifySongIdToEdit}
             selectedArtistForSongsList={this.props.selectedArtistForSongsList}
-            deleteSongFromJson={this.props.deleteSongFromJson}
-            />
-            } else {
-              return null
-            }
-        })}
-        </section>
+          />
+        <section className="artists-container">
+          {this.props.songs.map( song =>{
+            if (song.userId === sessionUserId) {
+              return <SongCard
+              key={song.id}
+              sendToSongSpecific={this.sendToSongSpecific}
+              song={song}
+              artists={this.props.artists}
+              artistToSongs={this.props.artistToSongs}
+              addToJson={this.props.addToJson}
+              speciifySongIdToEdit={speciifySongIdToEdit}
+              selectedArtistForSongsList={this.props.selectedArtistForSongsList}
+              deleteSongFromJson={this.props.deleteSongFromJson}
+              />
+              } else {
+                return null
+              }
+          })}
+          </section>
         </React.Fragment>
 
     )

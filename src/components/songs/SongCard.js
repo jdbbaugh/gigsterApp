@@ -22,10 +22,10 @@ songToDelete = () => {
           <Card.Title>{this.props.song.songName}</Card.Title>
             <Button
               onClick={this.toSpecificSong}
-              variant="primary">
+              variant="dark">
                 Work This Song
             </Button>
-            <Button variant="outline-danger" onClick={this.songToDelete}>Delete Song</Button>
+            <Button variant="outline-secondary" onClick={this.songToDelete}>Delete Song</Button>
         </Card.Body>
       </Card>
     )

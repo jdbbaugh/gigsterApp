@@ -43,11 +43,16 @@ export default class ChordsForSpecific extends Component {
   render() {
     return (
       <section className="progressionForSong">
-      {this.props.selectedArtistForSongsList.progression === "" ? <Button onClick={this.progressionEditing} variant="dark">Add Chords</Button>: <h4>Chord Chart:<a className="edit-name" onClick={this.progressionEditing}>   editChart</a></h4>}
+      {this.props.selectedArtistForSongsList.progression === "" ?
+      <Button onClick={this.progressionEditing} variant="dark">Add Chords</Button>:
+        <h4>Chord Chart:
+          <p href="#" className="edit-name" onClick={this.progressionEditing}>   editChart
+          </p>
+        </h4>}
         {!this.state.editProgression ? <h2>{this.props.selectedArtistForSongsList.progression}</h2> :
           <InputGroup>
             <InputGroup.Prepend>
-              <Button variant="danger" onClick={this.saveProgression}>Save Changes</Button>
+              <Button variant="dark" onClick={this.saveProgression}>Save Changes</Button>
             </InputGroup.Prepend>
             <FormControl as="textarea" id="progression" value={this.state.progression} onChange={this.handleFieldChange} aria-label="With textarea" />
           </InputGroup>}

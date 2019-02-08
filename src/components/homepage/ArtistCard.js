@@ -15,9 +15,11 @@ export default class ArtistCard extends Component {
   }
 
   artistToDelete = evt => {
+
     evt.preventDefault();
     console.log("NOOOOOOOO!")
-    this.props.deleteArtistFromJson(this.props.artist);
+    if (window.confirm("Are you sure you want to delete this artist? You will not be able to recover them or their songs.")){
+    this.props.deleteArtistFromJson(this.props.artist);}
   }
 
   render() {
@@ -42,15 +44,18 @@ export default class ArtistCard extends Component {
       <Card className="artist-specific-container" style={{ width: '18rem' }}>
         <Card.Img variant="top" src={this.props.artist.artistImageUrl} />
         <Card.Body>
-          <Card.Title>{this.props.artist.artistName}<a onClick={()=> this.props.speciifyArtistIdToEdit(this.props.artist.id)}
-            className="edit-name">  editThisName</a></Card.Title>
+          <Card.Title>{this.props.artist.artistName}
+              <p href="#" onClick={()=> this.props.speciifyArtistIdToEdit(this.props.artist.id)}
+              className="edit-name">  editThisName
+              </p>
+            </Card.Title>
           <Link to="/songs">
             <Button
-              variant="primary"
+              variant="dark"
               onClick={this.userSelectedArtist}>
                 Work Tunes
             </Button>
-            <Button variant="outline-danger" onClick={this.artistToDelete}>Delete Artist</Button>
+            <Button variant="outline-secondary" onClick={this.artistToDelete}>Delete Artist</Button>
           </Link>
         </Card.Body>
       </Card>

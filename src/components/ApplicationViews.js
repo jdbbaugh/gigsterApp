@@ -9,8 +9,10 @@ import SongSpecific from "./songspecific/SongSpecific"
 export default class ApplicationViews extends Component {
   state = {
     selectedArtistForSongsList: [],
-    specificSongForSongSpecific: ""
+    specificSongForSongSpecific: []
   }
+
+  isAuthenticated = () => sessionStorage.getItem("user") !== null
 
   artistSelectedByUser = selectedArtist => {
     // console.log("But for real Artist is:",selectedArtist);
@@ -18,25 +20,24 @@ export default class ApplicationViews extends Component {
   }
 
   specificSongForSongSpecific = selectedSong => {
-    this.setState({selectedArtistForSongsList: selectedSong})
+    this.setState({specificSongForSongSpecific: selectedSong})
   }
 
   deleteSongFromJson = (toDelete) => {
     console.log("deleting", toDelete)
-    this.props.addToJson({
-
-    "deleteId" : toDelete,
-    "dataSet" : "songs",
-    "fetchType" : "DELETE"
-}).then(() => {
 
 let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => artistToSong.songId === toDelete);
 // console.log("artistToSong", deleteSongFromArtistToSong.songId, deleteSongFromArtistToSong.id );
     this.props.addToJson({
+      "deleteId" : deleteSongFromArtistToSong.id,
+      "dataSet" : "artistToSongs",
+      "fetchType" : "DELETE"
 
-    "deleteId" : deleteSongFromArtistToSong.id,
-    "dataSet" : "artistToSongs",
-    "fetchType" : "DELETE"
+}).then(() => {
+this.props.addToJson({
+  "deleteId" : toDelete,
+  "dataSet" : "songs",
+  "fetchType" : "DELETE"
 });
 })
   }
@@ -54,13 +55,14 @@ let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => a
   });
   }
 
+
+
   render() {
+    console.log("Sets top of Appview",this.props.sets)
 
     if (this.props.artists.length === 0) {
       return null
     }
-
-    // console.log(this.props.artists[0])
     return (
 <React.Fragment>
   <Route exact path="/" render={props => {
@@ -74,13 +76,17 @@ let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => a
       getAllUsers={this.props.getAllUsers}/>
       }}/>
   <Route path="/home" render={props => {
+    if (this.isAuthenticated()) {
     return <Home
       artists={this.props.artists}
       addToJson={this.props.addToJson}
       artistSelectedByUser={this.artistSelectedByUser}
       deleteArtistFromJson={this.deleteArtistFromJson} />
-      }}/>
+    } else {
+      return <Redirect to='/' />
+    }}}/>
   <Route path="/songs" render={props => {
+    if (this.isAuthenticated()) {
     return <SongsList
       {...props}
       artists={this.props.artists}
@@ -91,14 +97,20 @@ let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => a
       selectedArtistForSongsList={this.state.selectedArtistForSongsList}
       specificSongForSongSpecific={this.specificSongForSongSpecific}
       deleteSongFromJson={this.deleteSongFromJson} />
-      }}/>
+    } else {
+      return <Redirect to='/' />
+    }}}/>
   <Route path="/specificsong" render={props => {
+    if (this.isAuthenticated()) {
     return <SongSpecific
-    selectedArtistForSongsList={this.state.selectedArtistForSongsList}
+    selectedArtistForSongsList={this.state.specificSongForSongSpecific}
     specificSongForSongSpecific={this.specificSongForSongSpecific}
     addToJson={this.props.addToJson}
-    songs={this.props.songs} />
-      }}/>
+    songs={this.props.songs}
+    artistSelectedByUser={this.artistSelectedByUser} />
+  } else {
+      return <Redirect to='/' />
+    }}}/>
 </React.Fragment>
     )
   }
