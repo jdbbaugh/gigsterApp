@@ -52,7 +52,7 @@ artistToSongConundrum = (newSongInfo) => {
     "dataBaseObject": {
       "songId": newSongInfo.id,
       "artistId": this.props.selectedArtistForSongsList,
-      "setId": 0
+      "setId": 1
     }
   })
 }
@@ -95,7 +95,7 @@ artistToSongConundrum = (newSongInfo) => {
             </Form.Group>
 
             <Form.Group>
-              <Form.Label>Original Artist</Form.Label>
+              <Form.Label>Version To Go By</Form.Label>
               <Form.Control
               type="text" required
               onChange={this.handleFieldChange}
