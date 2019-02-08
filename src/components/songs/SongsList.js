@@ -153,39 +153,40 @@ export default class Home extends Component {
 
     return (
       <React.Fragment>
-      <Button variant="dark" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Song</Button>
-      <Link to="/home">
-      <Button variant="secondary" size="lg" block>Return to All Artists</Button>
-      </Link>
-      <Setlist />
+        <Button variant="dark" onClick={() => this.setState({ modalShow: true })} size="lg" block>Add New Song</Button>
+        <Link to="/home">
+          <Button variant="secondary" size="lg" block>Return to All Artists</Button>
+        </Link>
 
-      <MyVerticallyCenteredModalSongs
-          show={this.state.modalShow}
-          onHide={modalClose}
-          songs={this.props.songs}
-          addNewSongToJson={this.props.addNewSongToJson}
-          addToJson={this.props.addToJson}
-          selectedArtistForSongsList={this.props.selectedArtistForSongsList}
-        />
-      <section className="artists-container">
-        {this.props.songs.map( song =>{
-          if (song.userId === sessionUserId) {
-            return <SongCard
-            key={song.id}
-            sendToSongSpecific={this.sendToSongSpecific}
-            song={song}
-            artists={this.props.artists}
-            artistToSongs={this.props.artistToSongs}
+        <Setlist />
+
+        <MyVerticallyCenteredModalSongs
+            show={this.state.modalShow}
+            onHide={modalClose}
+            songs={this.props.songs}
+            addNewSongToJson={this.props.addNewSongToJson}
             addToJson={this.props.addToJson}
-            speciifySongIdToEdit={speciifySongIdToEdit}
             selectedArtistForSongsList={this.props.selectedArtistForSongsList}
-            deleteSongFromJson={this.props.deleteSongFromJson}
-            />
-            } else {
-              return null
-            }
-        })}
-        </section>
+          />
+        <section className="artists-container">
+          {this.props.songs.map( song =>{
+            if (song.userId === sessionUserId) {
+              return <SongCard
+              key={song.id}
+              sendToSongSpecific={this.sendToSongSpecific}
+              song={song}
+              artists={this.props.artists}
+              artistToSongs={this.props.artistToSongs}
+              addToJson={this.props.addToJson}
+              speciifySongIdToEdit={speciifySongIdToEdit}
+              selectedArtistForSongsList={this.props.selectedArtistForSongsList}
+              deleteSongFromJson={this.props.deleteSongFromJson}
+              />
+              } else {
+                return null
+              }
+          })}
+          </section>
         </React.Fragment>
 
     )

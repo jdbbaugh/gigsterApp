@@ -44,7 +44,7 @@ export default class ArtistCard extends Component {
       <Card className="artist-specific-container" style={{ width: '18rem' }}>
         <Card.Img variant="top" src={this.props.artist.artistImageUrl} />
         <Card.Body>
-          <Card.Title>{this.props.artist.artistName}<a onClick={()=> this.props.speciifyArtistIdToEdit(this.props.artist.id)}
+          <Card.Title>{this.props.artist.artistName}<a href="#" onClick={()=> this.props.speciifyArtistIdToEdit(this.props.artist.id)}
             className="edit-name">  editThisName</a></Card.Title>
           <Link to="/songs">
             <Button
