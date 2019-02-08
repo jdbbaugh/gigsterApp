@@ -22,10 +22,10 @@ export default class Login extends Component {
     this.props.checkUserLogin()
         .then(allUsers => {
           // console.log(allUsers)
-          let findingUser = allUsers.filter(user => user.userName === this.state.userName)
+          let findingUser = allUsers.filter(user => user.userName === this.state.userName && user.password === this.state.password)
           // console.log(findingUser)
             if(findingUser.length < 1) {
-                alert("We can't seem to find you! Try registering below")
+                alert("We can't seem to find you! Rethink your password, or try registering below!")
             } else {
                 allUsers.forEach(user => {
                     let loggedIn= false;
