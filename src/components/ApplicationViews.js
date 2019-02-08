@@ -9,7 +9,7 @@ import SongSpecific from "./songspecific/SongSpecific"
 export default class ApplicationViews extends Component {
   state = {
     selectedArtistForSongsList: [],
-    specificSongForSongSpecific: ""
+    specificSongForSongSpecific: []
   }
 
   isAuthenticated = () => sessionStorage.getItem("user") !== null
@@ -20,7 +20,7 @@ export default class ApplicationViews extends Component {
   }
 
   specificSongForSongSpecific = selectedSong => {
-    this.setState({selectedArtistForSongsList: selectedSong})
+    this.setState({specificSongForSongSpecific: selectedSong})
   }
 
   deleteSongFromJson = (toDelete) => {
@@ -103,7 +103,7 @@ let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => a
   <Route path="/specificsong" render={props => {
     if (this.isAuthenticated()) {
     return <SongSpecific
-    selectedArtistForSongsList={this.state.selectedArtistForSongsList}
+    selectedArtistForSongsList={this.state.specificSongForSongSpecific}
     specificSongForSongSpecific={this.specificSongForSongSpecific}
     addToJson={this.props.addToJson}
     songs={this.props.songs}
