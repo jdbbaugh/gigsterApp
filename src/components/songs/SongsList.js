@@ -3,6 +3,7 @@
 
 import React, { Component } from 'react';
 import SongCard from "./SongCard"
+import Setlist from '../setlist/Setlist'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -156,6 +157,7 @@ export default class Home extends Component {
       <Link to="/home">
       <Button variant="secondary" size="lg" block>Return to All Artists</Button>
       </Link>
+      <Setlist />
 
       <MyVerticallyCenteredModalSongs
           show={this.state.modalShow}
