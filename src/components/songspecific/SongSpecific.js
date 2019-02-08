@@ -76,7 +76,10 @@ export default class SongSpecific extends Component {
     return (
       <div>
         <Link to="/home">
-        <Button variant="secondary" size="lg" block>Return to Artist Display</Button>
+          <Button variant="secondary" size="lg">Return to Artist Display</Button>
+        </Link>
+        <Link to="/songs">
+          <Button variant="outline-dark" size="lg">Return to Artist Library</Button>
         </Link>
           <h2>{this.props.selectedArtistForSongsList.songName}</h2>
           <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>

@@ -106,7 +106,8 @@ let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => a
     selectedArtistForSongsList={this.state.selectedArtistForSongsList}
     specificSongForSongSpecific={this.specificSongForSongSpecific}
     addToJson={this.props.addToJson}
-    songs={this.props.songs} />
+    songs={this.props.songs}
+    artistSelectedByUser={this.artistSelectedByUser} />
   } else {
       return <Redirect to='/' />
     }}}/>
