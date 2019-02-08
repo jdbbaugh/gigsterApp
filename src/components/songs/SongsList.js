@@ -111,13 +111,13 @@ artistToSongConundrum = (newSongInfo) => {
               id="genre"
               placeholder="Jazz, Rock, Blues....." />
             </Form.Group>
-            <Button onClick={this.props.onHide} variant="primary" type="submit">
+            <Button onClick={this.props.onHide} variant="dark" type="submit">
               Submit
             </Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
+          <Button onClick={this.props.onHide} variant="outline-dark">Close</Button>
         </Modal.Footer>
       </Modal>
     );

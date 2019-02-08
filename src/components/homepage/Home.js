@@ -38,6 +38,7 @@ addNewArtist = evt => {
     return (
       <Modal
         {...this.props}
+        className="newArtist-modal"
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -69,13 +70,13 @@ addNewArtist = evt => {
               id="artistName"
               placeholder="Enter Artist Name" />
             </Form.Group>
-            <Button onClick={this.props.onHide} variant="primary" type="submit">
+            <Button onClick={this.props.onHide} variant="dark" type="submit">
               Submit
             </Button>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.props.onHide}>Close</Button>
+          <Button variant="outline-dark" onClick={this.props.onHide}>Close</Button>
         </Modal.Footer>
       </Modal>
     );
