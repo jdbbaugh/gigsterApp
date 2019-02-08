@@ -25,20 +25,19 @@ export default class ApplicationViews extends Component {
 
   deleteSongFromJson = (toDelete) => {
     console.log("deleting", toDelete)
-    this.props.addToJson({
-
-    "deleteId" : toDelete,
-    "dataSet" : "songs",
-    "fetchType" : "DELETE"
-}).then(() => {
 
 let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => artistToSong.songId === toDelete);
 // console.log("artistToSong", deleteSongFromArtistToSong.songId, deleteSongFromArtistToSong.id );
     this.props.addToJson({
+      "deleteId" : deleteSongFromArtistToSong.id,
+      "dataSet" : "artistToSongs",
+      "fetchType" : "DELETE"
 
-    "deleteId" : deleteSongFromArtistToSong.id,
-    "dataSet" : "artistToSongs",
-    "fetchType" : "DELETE"
+}).then(() => {
+this.props.addToJson({
+  "deleteId" : toDelete,
+  "dataSet" : "songs",
+  "fetchType" : "DELETE"
 });
 })
   }
