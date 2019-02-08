@@ -35,7 +35,7 @@ export default class ArtistNameSaveEdit extends Component {
     return (
       <React.Fragment>
       <input type="text" required id="artistName" value={this.state.artistName} onChange={this.handleFieldChange} />
-      <Button variant="primary" onClick={this.constructNewArtistName}>Rename/Edit Artist</Button>
+      <Button variant="outline-dark" onClick={this.constructNewArtistName}>Rename/Edit Artist</Button>
       </React.Fragment>
     )
   }
