@@ -11,6 +11,8 @@ export default class SongSpecific extends Component {
   state = {
     editNote: false,
     editUrl: false,
+    editSongName: false,
+    songName:this.props.selectedArtistForSongsList.songName,
     notes: this.props.selectedArtistForSongsList.notes,
     url: this.props.selectedArtistForSongsList.url
   }
@@ -19,6 +21,10 @@ export default class SongSpecific extends Component {
     const stateToChange = {}
     stateToChange[evt.target.id] = evt.target.value
     this.setState(stateToChange)
+  }
+
+  songNameChange = () => {
+    this.setState({editSongName: true})
   }
 
   youtubeURLchange = () => {
@@ -74,6 +80,29 @@ export default class SongSpecific extends Component {
     this.props.specificSongForSongSpecific(songUpdate)
     this.setState({editNote: false})
   }
+
+  saveNewSongName = () => {
+    console.log("saving songName")
+    let songUpdate = {
+      "id" : this.props.selectedArtistForSongsList.id,
+      userId: this.props.selectedArtistForSongsList.userId,
+      songName: this.state.songName,
+      genre: this.props.selectedArtistForSongsList.genre,
+      writer: this.props.selectedArtistForSongsList.writer,
+      progression: this.props.selectedArtistForSongsList.progression,
+      url: this.props.selectedArtistForSongsList.url,
+      "notes": this.state.notes
+    }
+    this.props.addToJson({
+    "putId" :this.props.selectedArtistForSongsList.id,
+    "dataSet" : "songs",
+    "fetchType" : "PUT",
+    "dataBaseObject" : songUpdate
+    });
+
+    this.props.specificSongForSongSpecific(songUpdate)
+    this.setState({editSongName: false})
+  }
   render() {
     return (
       <div>
@@ -83,10 +112,19 @@ export default class SongSpecific extends Component {
         <Link to="/songs">
           <Button variant="outline-dark" size="lg">Return to Artist Library</Button>
         </Link>
-          <h2>{this.props.selectedArtistForSongsList.songName}
-            <p href="#" className="edit-name">   editSongName
-            </p>
-          </h2>
+
+            {this.state.editSongName ?
+              <InputGroup className="mb-3">
+                <InputGroup.Prepend>
+                  <Button variant="dark" onClick={this.saveNewSongName}>Save</Button>
+                </InputGroup.Prepend>
+                <FormControl aria-describedby="basic-addon1" id="songName" value={this.state.songName} onChange={this.handleFieldChange} />
+              </InputGroup>
+              : <h2>{this.props.selectedArtistForSongsList.songName}<p
+              href="#"
+              className="edit-name"
+              onClick={this.songNameChange}>   editSongName</p></h2>}
+
           <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
           <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
           {this.state.editUrl ? <Button onClick={this.youtubeSaveUrl} variant="danger">Save New Youtube URL</Button> : <Button variant="secondary" onClick={this.youtubeURLchange}>Change Video Link</Button>}
