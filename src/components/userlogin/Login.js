@@ -22,22 +22,14 @@ export default class Login extends Component {
     this.props.checkUserLogin()
         .then(allUsers => {
           // console.log(allUsers)
-          let findingUser = allUsers.filter(user => user.userName === this.state.userName && user.password === this.state.password)
-          // console.log(findingUser)
-            if(findingUser.length < 1) {
+          let findingUser = allUsers.find(user => user.userName === this.state.userName && user.password === this.state.password)
+          console.log(findingUser)
+            if(findingUser === undefined) {
                 alert("We can't seem to find you! Rethink your password, or try registering below!")
             } else {
-                allUsers.forEach(user => {
-                    let loggedIn= false;
-                    if (this.state.userName === user.userName && this.state.password === user.password) {
-                            loggedIn= true;
-                        }
-                    if (loggedIn === true){
-                        sessionStorage.setItem("user", user.id);
-                        console.log("You're logged in as user", user.id)
+                        sessionStorage.setItem("user", findingUser.id);
+                        console.log("You're logged in as user", findingUser.id)
                         this.props.history.push("/home");
-                    }
-                })
             }
         })
 
