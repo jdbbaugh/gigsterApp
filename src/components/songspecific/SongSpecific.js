@@ -11,8 +11,12 @@ export default class SongSpecific extends Component {
   state = {
     editNote: false,
     editUrl: false,
+    editWriter: false,
+    editGenre: false,
     editSongName: false,
     songName:this.props.selectedArtistForSongsList.songName,
+    writer:this.props.selectedArtistForSongsList.writer,
+    genre:this.props.selectedArtistForSongsList.genre,
     notes: this.props.selectedArtistForSongsList.notes,
     url: this.props.selectedArtistForSongsList.url
   }
@@ -25,6 +29,12 @@ export default class SongSpecific extends Component {
 
   songNameChange = () => {
     this.setState({editSongName: true})
+  }
+  writerChange = () => {
+    this.setState({editWriter: true})
+  }
+  genreChange = () => {
+    this.setState({editGenre: true})
   }
 
   youtubeURLchange = () => {
@@ -125,7 +135,9 @@ export default class SongSpecific extends Component {
               className="edit-name"
               onClick={this.songNameChange}>   editSongName</p></h2>}
 
-          <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
+          {this.state.editWriter ? null : <p onClick={this.writerChange}>{this.props.selectedArtistForSongsList.writer}</p>}
+          {this.state.editGenre ? null : <p onClick={this.genreChange}>-{this.props.selectedArtistForSongsList.genre}</p>}
+
           <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
           {this.state.editUrl ? <Button onClick={this.youtubeSaveUrl} variant="danger">Save New Youtube URL</Button> : <Button variant="secondary" onClick={this.youtubeURLchange}>Change Video Link</Button>}
           {this.state.editUrl ? <input type="text" id="url" value={this.state.url} className="youtube-url-new" onChange={this.handleFieldChange}/> : null}
