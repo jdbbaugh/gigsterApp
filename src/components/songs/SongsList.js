@@ -132,13 +132,18 @@ export default class Home extends Component {
 
     this.state = {
       modalShow: false,
-      artistIdForEditing: 0
+      artistIdForEditing: 0,
+      chosenSet: []
     };
   }
   sendToSongSpecific = (songIdForSecificity) => {
     // console.log(songIdForSecificity)
     this.props.specificSongForSongSpecific(songIdForSecificity)
     this.props.history.push("/specificsong")
+  }
+
+  setChosenSetToState = (set) => {
+    console.log("state is", set)
   }
   render() {
     let modalClose = () => this.setState({ modalShow: false });
@@ -159,7 +164,8 @@ export default class Home extends Component {
         </Link>
 
         <Setlist
-        sets={this.props.sets} />
+        sets={this.props.sets}
+        setChosenSetToState={this.setChosenSetToState} />
 
         <MyVerticallyCenteredModalSongs
             show={this.state.modalShow}

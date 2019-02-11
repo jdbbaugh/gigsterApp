@@ -3,7 +3,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 export default class SetCard extends Component {
 selectSet = () => {
-  console.log(this.props.set.setName)
+  this.props.setChosenSetToState(this.props.set.setName)
 }
 
   render() {
