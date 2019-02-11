@@ -133,12 +133,12 @@ export default class Home extends Component {
     this.state = {
       modalShow: false,
       artistIdForEditing: 0,
-      chosenSet: [
+      chosenSet:
         {
           "id": 1,
           "setName": "All Songs"
         }
-      ]
+
     };
   }
   sendToSongSpecific = (songIdForSecificity) => {
