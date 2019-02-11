@@ -96,7 +96,8 @@ this.props.addToJson({
       addToJson={this.props.addToJson}
       selectedArtistForSongsList={this.state.selectedArtistForSongsList}
       specificSongForSongSpecific={this.specificSongForSongSpecific}
-      deleteSongFromJson={this.deleteSongFromJson} />
+      deleteSongFromJson={this.deleteSongFromJson}
+      sets={this.props.sets} />
     } else {
       return <Redirect to='/' />
     }}}/>

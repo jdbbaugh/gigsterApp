@@ -158,7 +158,8 @@ export default class Home extends Component {
           <Button variant="secondary" size="lg" block>Return to All Artists</Button>
         </Link>
 
-        <Setlist />
+        <Setlist
+        sets={this.props.sets} />
 
         <MyVerticallyCenteredModalSongs
             show={this.state.modalShow}

@@ -7,9 +7,7 @@ export default class Setlist extends Component {
     return (
     <Dropdown>
       <DropdownButton id="dropdown-item-button" variant="" title="Sets">
-        <Dropdown.Item as="button">Action</Dropdown.Item>
-        <Dropdown.Item as="button">Another action</Dropdown.Item>
-        <Dropdown.Item as="button">Something else</Dropdown.Item>
+        {this.props.sets.map(set => <Dropdown.Item key={set.id} as="button">{set.setName}</Dropdown.Item>)}
       </DropdownButton>
     </Dropdown>
     )
