@@ -53,10 +53,10 @@ saveNewSongName = () => {
 
   render() {
     console.log(this.props.chosenSet)
-
     if (this.props.artistToSongs.find(
       artistToSong => artistToSong.songId === this.props.song.id && artistToSong.artistId === this.props.selectedArtistForSongsList && artistToSong.setId === this.props.chosenSet.id)) {
     return (
+      <React.Fragment>
       <Card className="artist-specific-container" style={{ width: '18rem' }}>
         <Card.Body>
         {this.state.editSongName ?
@@ -75,6 +75,7 @@ saveNewSongName = () => {
             <Button variant="outline-secondary" onClick={this.songToDelete}>Delete Song</Button>
         </Card.Body>
       </Card>
+      </React.Fragment>
     )
   } else {
     return null

@@ -173,6 +173,7 @@ export default class Home extends Component {
         sets={this.props.sets}
         setChosenSetToState={this.setChosenSetToState} />
 
+        <h2 className="setName-title">{this.state.chosenSet.setName}</h2>
         <MyVerticallyCenteredModalSongs
             show={this.state.modalShow}
             onHide={modalClose}
