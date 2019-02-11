@@ -133,7 +133,12 @@ export default class Home extends Component {
     this.state = {
       modalShow: false,
       artistIdForEditing: 0,
-      chosenSet: []
+      chosenSet: [
+        {
+          "id": 1,
+          "setName": "All Songs"
+        }
+      ]
     };
   }
   sendToSongSpecific = (songIdForSecificity) => {
@@ -144,6 +149,7 @@ export default class Home extends Component {
 
   setChosenSetToState = (set) => {
     console.log("state is", set)
+    this.setState({chosenSet: set})
   }
   render() {
     let modalClose = () => this.setState({ modalShow: false });
@@ -179,6 +185,7 @@ export default class Home extends Component {
           {this.props.songs.map( song =>{
             if (song.userId === sessionUserId) {
               return <SongCard
+              chosenSet={this.state.chosenSet}
               key={song.id}
               sendToSongSpecific={this.sendToSongSpecific}
               song={song}

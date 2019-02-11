@@ -52,10 +52,10 @@ saveNewSongName = () => {
 }
 
   render() {
-    // console.log(this.props.artistToSongs)
+    console.log(this.props.chosenSet)
 
     if (this.props.artistToSongs.find(
-      artistToSong => artistToSong.songId === this.props.song.id && artistToSong.artistId === this.props.selectedArtistForSongsList)) {
+      artistToSong => artistToSong.songId === this.props.song.id && artistToSong.artistId === this.props.selectedArtistForSongsList && artistToSong.setId === this.props.chosenSet.id)) {
     return (
       <Card className="artist-specific-container" style={{ width: '18rem' }}>
         <Card.Body>
