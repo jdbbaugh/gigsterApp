@@ -171,7 +171,8 @@ export default class Home extends Component {
 
         <Setlist
         sets={this.props.sets}
-        setChosenSetToState={this.setChosenSetToState} />
+        setChosenSetToState={this.setChosenSetToState}
+        selectedArtistForSongsList={this.props.selectedArtistForSongsList} />
 
         <h2 className="setName-title">{this.state.chosenSet.setName}</h2>
         <MyVerticallyCenteredModalSongs
