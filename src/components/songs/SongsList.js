@@ -143,6 +143,9 @@ export default class SongsList extends Component {
     this.props.history.push("/specificsong")
   }
   render() {
+    const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
+    console.log(artist)
+
     let modalClose = () => this.setState({ modalShow: false });
     let sessionUserId = Number(sessionStorage.getItem("user"));
     // console.log("Home",sessionUserId);
@@ -182,7 +185,7 @@ export default class SongsList extends Component {
               artistToSongs={this.props.artistToSongs}
               addToJson={this.props.addToJson}
               speciifySongIdToEdit={speciifySongIdToEdit}
-              selectedArtistForSongsList={this.props.selectedArtistForSongsList}
+              selectedArtistForSongsList={artist.id}
               deleteSongFromJson={this.props.deleteSongFromJson}
               specificSongForSongSpecific={this.props.specificSongForSongSpecific}
               />
