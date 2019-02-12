@@ -169,3 +169,7 @@ body {
   .not-a-user {
   margin-top: 5%;
   }
+
+  .logo-displayed {
+    font-family: 'VT323', monospace;
+  }
