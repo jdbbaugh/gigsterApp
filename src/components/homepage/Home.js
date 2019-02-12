@@ -22,7 +22,7 @@ class MyVerticallyCenteredModalArtists extends Component {
 
 addNewArtist = evt => {
   evt.preventDefault()
-  this.props.addToJson({
+  this.props.addtojson({
     "dataSet" : "artists",
     "fetchType" : "POST",
     "dataBaseObject": {
@@ -123,7 +123,7 @@ export default class Home extends Component {
             artist={artist}
             speciifyArtistIdToEdit={speciifyArtistIdToEdit}
             artistIdForEditing={this.state.artistIdForEditing}
-            addToJson={this.props.addToJson}
+            addtojson={this.props.addToJson}
             artistSelectedByUser={this.props.artistSelectedByUser}
             deleteArtistFromJson={this.props.deleteArtistFromJson}
             />
