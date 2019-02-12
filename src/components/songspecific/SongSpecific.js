@@ -101,7 +101,7 @@ export default class SongSpecific extends Component {
       writer: this.props.selectedArtistForSongsList.writer,
       progression: this.props.selectedArtistForSongsList.progression,
       url: this.props.selectedArtistForSongsList.url,
-      "notes": this.state.notes
+      "notes": this.props.selectedArtistForSongsList.notes
     }
     this.props.addToJson({
     "putId" :this.props.selectedArtistForSongsList.id,
@@ -112,6 +112,48 @@ export default class SongSpecific extends Component {
 
     this.props.specificSongForSongSpecific(songUpdate)
     this.setState({editSongName: false})
+  }
+  saveNewWriter = () => {
+    let songUpdate = {
+      "id" : this.props.selectedArtistForSongsList.id,
+      userId: this.props.selectedArtistForSongsList.userId,
+      songName: this.props.selectedArtistForSongsList.songName,
+      genre: this.props.selectedArtistForSongsList.genre,
+      writer: this.state.writer,
+      progression: this.props.selectedArtistForSongsList.progression,
+      url: this.props.selectedArtistForSongsList.url,
+      "notes": this.props.selectedArtistForSongsList.notes
+    }
+    this.props.addToJson({
+    "putId" :this.props.selectedArtistForSongsList.id,
+    "dataSet" : "songs",
+    "fetchType" : "PUT",
+    "dataBaseObject" : songUpdate
+    });
+
+    this.props.specificSongForSongSpecific(songUpdate)
+    this.setState({editWriter: false})
+  }
+  saveNewGenre = () => {
+    let songUpdate = {
+      "id" : this.props.selectedArtistForSongsList.id,
+      userId: this.props.selectedArtistForSongsList.userId,
+      songName: this.props.selectedArtistForSongsList.songName,
+      genre: this.state.genre,
+      writer: this.props.selectedArtistForSongsList.writer,
+      progression: this.props.selectedArtistForSongsList.progression,
+      url: this.props.selectedArtistForSongsList.url,
+      "notes": this.props.selectedArtistForSongsList.notes
+    }
+    this.props.addToJson({
+    "putId" :this.props.selectedArtistForSongsList.id,
+    "dataSet" : "songs",
+    "fetchType" : "PUT",
+    "dataBaseObject" : songUpdate
+    });
+
+    this.props.specificSongForSongSpecific(songUpdate)
+    this.setState({editGenre: false})
   }
   render() {
     return (
@@ -135,8 +177,22 @@ export default class SongSpecific extends Component {
               className="edit-name"
               onClick={this.songNameChange}>   editSongName</p></h2>}
 
-          {this.state.editWriter ? null : <p onClick={this.writerChange}>{this.props.selectedArtistForSongsList.writer}</p>}
-          {this.state.editGenre ? null : <p onClick={this.genreChange}>-{this.props.selectedArtistForSongsList.genre}</p>}
+          {this.state.editWriter ?
+              <InputGroup className="mb-3">
+                <InputGroup.Prepend>
+                  <Button variant="dark" onClick={this.saveNewWriter}>Save</Button>
+                </InputGroup.Prepend>
+                <FormControl aria-describedby="basic-addon1" id="writer" value={this.state.writer} onChange={this.handleFieldChange} />
+              </InputGroup>
+              : <p onClick={this.writerChange}>{this.props.selectedArtistForSongsList.writer}</p>}
+          {this.state.editGenre ?
+              <InputGroup className="mb-3">
+                <InputGroup.Prepend>
+                  <Button variant="dark" onClick={this.saveNewGenre}>Save</Button>
+                </InputGroup.Prepend>
+                <FormControl aria-describedby="basic-addon1" id="genre" value={this.state.genre} onChange={this.handleFieldChange} />
+              </InputGroup>
+              : <p onClick={this.genreChange}>-{this.props.selectedArtistForSongsList.genre}</p>}
 
           <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
           {this.state.editUrl ? <Button onClick={this.youtubeSaveUrl} variant="danger">Save New Youtube URL</Button> : <Button variant="secondary" onClick={this.youtubeURLchange}>Change Video Link</Button>}
