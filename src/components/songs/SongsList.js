@@ -56,6 +56,17 @@ artistToSongConundrum = (newSongInfo) => {
       "setId": 1
     }
   })
+  .then(() => {
+    this.props.addToJson({
+      "dataSet" : "artistToSongs",
+      "fetchType" : "POST",
+      "dataBaseObject": {
+        "songId": newSongInfo.id,
+        "artistId": this.props.selectedArtistForSongsList,
+        "setId": this.props.chosenSet.id
+      }
+    })
+  })
 }
 
   render() {
@@ -182,6 +193,7 @@ export default class Home extends Component {
             addNewSongToJson={this.props.addNewSongToJson}
             addToJson={this.props.addToJson}
             selectedArtistForSongsList={this.props.selectedArtistForSongsList}
+            chosenSet={this.state.chosenSet}
           />
         <section className="artists-container">
           {this.props.songs.map( song =>{

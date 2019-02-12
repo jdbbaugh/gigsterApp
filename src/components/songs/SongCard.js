@@ -52,7 +52,7 @@ saveNewSongName = () => {
 }
 
   render() {
-    console.log(this.props.chosenSet)
+    // console.log(this.props.chosenSet)
     if (this.props.artistToSongs.find(
       artistToSong => artistToSong.songId === this.props.song.id && artistToSong.artistId === this.props.selectedArtistForSongsList && artistToSong.setId === this.props.chosenSet.id)) {
     return (

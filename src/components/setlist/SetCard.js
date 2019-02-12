@@ -7,7 +7,7 @@ selectSet = () => {
 }
 
   render() {
-    console.log(this.props.set.artistToSongs, this.props.selectedArtistForSongsList)
+    // console.log(this.props.set.artistToSongs, this.props.selectedArtistForSongsList)
     let artistSpecificSet = this.props.set.artistToSongs.find(artistToSong => artistToSong.artistId === this.props.selectedArtistForSongsList)
     if (artistSpecificSet === undefined) {
       return null
