@@ -85,7 +85,7 @@ this.props.addToJson({
     } else {
       return <Redirect to='/' />
     }}}/>
-  <Route path="/songs" render={props => {
+  <Route path="/songs/:artist(\d+)" render={props => {
     if (this.isAuthenticated()) {
     return <SongsList
       {...props}

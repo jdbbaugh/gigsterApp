@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import SongCard from "./SongCard"
-import Setlist from '../setlist/Setlist'
+// import Setlist from '../setlist/Setlist'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -126,7 +126,7 @@ artistToSongConundrum = (newSongInfo) => {
 }
 
 
-export default class Home extends Component {
+export default class SongsList extends Component {
   constructor(...args) {
     super(...args)
 
@@ -135,6 +135,8 @@ export default class Home extends Component {
       artistIdForEditing: 0
     };
   }
+
+
   sendToSongSpecific = (songIdForSecificity) => {
     // console.log(songIdForSecificity)
     this.props.specificSongForSongSpecific(songIdForSecificity)
@@ -146,7 +148,7 @@ export default class Home extends Component {
     // console.log("Home",sessionUserId);
 
     const speciifySongIdToEdit = (artistId) => {
-      // console.log(artistId, sessionUserId);
+      console.log(this.props.match.params)
       this.setState({artistIdForEditing: artistId})
       // this will be to edit stuff in the song specific json so keep it for now
     }
@@ -158,8 +160,8 @@ export default class Home extends Component {
           <Button variant="secondary" size="lg" block>Return to All Artists</Button>
         </Link>
 
-        <Setlist
-        sets={this.props.sets} />
+        {/* <Setlist
+        sets={this.props.sets} /> */}
 
         <MyVerticallyCenteredModalSongs
             show={this.state.modalShow}
