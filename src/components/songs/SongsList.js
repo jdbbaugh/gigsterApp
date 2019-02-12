@@ -143,6 +143,7 @@ export default class Home extends Component {
 
     this.state = {
       modalShow: false,
+      createNewSet: false,
       artistIdForEditing: 0,
       chosenSet:
         {
@@ -152,6 +153,11 @@ export default class Home extends Component {
 
     };
   }
+
+  newSetToggle = () => {
+    this.setState({createNewSet: true})
+  }
+
   sendToSongSpecific = (songIdForSecificity) => {
     // console.log(songIdForSecificity)
     this.props.specificSongForSongSpecific(songIdForSecificity)
@@ -179,7 +185,7 @@ export default class Home extends Component {
         <Link to="/home">
           <Button variant="secondary" size="lg" block>Return to All Artists</Button>
         </Link>
-
+        {this.state.createNewSet ? null : <Button onClick={this.newSetToggle} variant="">Create New Set</Button>}
         <Setlist
         sets={this.props.sets}
         setChosenSetToState={this.setChosenSetToState}
