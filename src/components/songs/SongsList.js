@@ -140,7 +140,7 @@ export default class SongsList extends Component {
   sendToSongSpecific = (songIdForSecificity) => {
     // console.log(songIdForSecificity)
     this.props.specificSongForSongSpecificFunc(songIdForSecificity)
-    this.props.history.push("/specificsong")
+    // this.props.history.push("/specificsong")
   }
   render() {
     const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
