@@ -17,6 +17,7 @@ export default class SongSpecific extends Component {
     url: this.props.selectedArtistForSongsList.url
   }
 
+
   handleFieldChange = evt => {
     const stateToChange = {}
     stateToChange[evt.target.id] = evt.target.value
@@ -104,12 +105,14 @@ export default class SongSpecific extends Component {
     this.setState({editSongName: false})
   }
   render() {
+    const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
+    const song = this.props.songs.find(song => song.id === parseInt(this.props.match.params.songId)) || {}
     return (
       <div>
         <Link to="/home">
           <Button variant="secondary" size="lg">Return to All Artists</Button>
         </Link>
-        <Link to={`/songs/1`}>
+        <Link to={`/songs/${artist.id}`}>
           <Button variant="outline-dark" size="lg">Return to Artist Library</Button>
         </Link>
 
@@ -120,17 +123,17 @@ export default class SongSpecific extends Component {
                 </InputGroup.Prepend>
                 <FormControl aria-describedby="basic-addon1" id="songName" value={this.state.songName} onChange={this.handleFieldChange} />
               </InputGroup>
-              : <h2>{this.props.selectedArtistForSongsList.songName}<p
+              : <h2>{song.songName}<p
               href="#"
               className="edit-name"
               onClick={this.songNameChange}>   editSongName</p></h2>}
 
-          <p>{this.props.selectedArtistForSongsList.writer}<br></br>-{this.props.selectedArtistForSongsList.genre}</p>
-          <YoutubeHolder selectedArtistForSongsList={this.props.selectedArtistForSongsList}/>
+          <p>{song.writer}<br></br>-{song.genre}</p>
+          <YoutubeHolder selectedArtistForSongsList={song}/>
           {this.state.editUrl ? <Button onClick={this.youtubeSaveUrl} variant="danger">Save New Youtube URL</Button> : <Button variant="secondary" onClick={this.youtubeURLchange}>Change Video Link</Button>}
           {this.state.editUrl ? <input type="text" id="url" value={this.state.url} className="youtube-url-new" onChange={this.handleFieldChange}/> : null}
           <ChordsForSpecific
-          selectedArtistForSongsList={this.props.selectedArtistForSongsList}
+          selectedArtistForSongsList={song}
           addToJson={this.props.addToJson}
           specificSongForSongSpecific={this.props.specificSongForSongSpecific} />
         <section className="notesForSong">
@@ -143,7 +146,7 @@ export default class SongSpecific extends Component {
               <Button variant="dark" onClick={this.saveNewNotes}>Save Changes</Button>
             </InputGroup.Prepend>
             <FormControl as="textarea" id="notes" value={this.state.notes} onChange={this.handleFieldChange} aria-label="With textarea" />
-          </InputGroup> : <p>{this.props.selectedArtistForSongsList.notes}</p>}
+          </InputGroup> : <p>{song.notes}</p>}
         </section>
 
 

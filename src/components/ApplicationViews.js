@@ -104,6 +104,8 @@ this.props.addToJson({
   <Route path="/specificsong/:artistId(\d+)/:songId(\d+)" render={props => {
     if (this.isAuthenticated()) {
     return <SongSpecific
+    {...props}
+    artists={this.props.artists}
     selectedArtistForSongsList={this.state.specificSongForSongSpecific}
     specificSongForSongSpecific={this.specificSongForSongSpecific}
     addToJson={this.props.addToJson}
