@@ -105,8 +105,8 @@ export default class SongSpecific extends Component {
     this.setState({editSongName: false})
   }
   render() {
-    const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
-    const song = this.props.songs.find(song => song.id === parseInt(this.props.match.params.songId)) || {}
+    const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {};
+    const song = this.props.songs.find(song => song.id === parseInt(this.props.match.params.songId)) || {};
 
     return (
       <div>
