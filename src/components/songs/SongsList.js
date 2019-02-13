@@ -137,7 +137,7 @@ artistToSongConundrum = (newSongInfo) => {
 }
 
 
-export default class Home extends Component {
+export default class SongsList extends Component {
   constructor(...args) {
     super(...args)
 
@@ -154,14 +154,11 @@ export default class Home extends Component {
     };
   }
 
-  newSetToggle = () => {
-    this.setState({createNewSet: true})
-  }
 
   sendToSongSpecific = (songIdForSecificity) => {
     // console.log(songIdForSecificity)
-    this.props.specificSongForSongSpecific(songIdForSecificity)
-    this.props.history.push("/specificsong")
+    this.props.specificSongForSongSpecificFunc(songIdForSecificity)
+    // this.props.history.push("/specificsong")
   }
 
   setChosenSetToState = (set) => {
@@ -169,12 +166,15 @@ export default class Home extends Component {
     this.setState({chosenSet: set})
   }
   render() {
+    const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
+    console.log(artist)
+
     let modalClose = () => this.setState({ modalShow: false });
     let sessionUserId = Number(sessionStorage.getItem("user"));
     // console.log("Home",sessionUserId);
 
     const speciifySongIdToEdit = (artistId) => {
-      // console.log(artistId, sessionUserId);
+      console.log(this.props.match.params)
       this.setState({artistIdForEditing: artistId})
       // this will be to edit stuff in the song specific json so keep it for now
     }
@@ -213,9 +213,9 @@ export default class Home extends Component {
               artistToSongs={this.props.artistToSongs}
               addToJson={this.props.addToJson}
               speciifySongIdToEdit={speciifySongIdToEdit}
-              selectedArtistForSongsList={this.props.selectedArtistForSongsList}
+              selectedArtistForSongsList={artist.id}
               deleteSongFromJson={this.props.deleteSongFromJson}
-              specificSongForSongSpecific={this.props.specificSongForSongSpecific}
+              specificSongForSongSpecificFunc={this.props.specificSongForSongSpecificFunc}
               />
               } else {
                 return null

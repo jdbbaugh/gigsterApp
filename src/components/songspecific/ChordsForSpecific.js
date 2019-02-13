@@ -6,7 +6,7 @@ import FormControl from 'react-bootstrap/FormControl'
 export default class ChordsForSpecific extends Component {
   state = {
     editProgression: false,
-    progression: this.props.selectedArtistForSongsList.progression
+    progression: this.props.song.progression
   }
 
   handleFieldChange = evt => {
@@ -17,39 +17,40 @@ export default class ChordsForSpecific extends Component {
 
   progressionEditing = () => {
     this.setState({editProgression: true})
+    this.setState({progression: this.props.song.progression})
   }
 
   saveProgression = () => {
     console.log('clickity')
     let songUpdate = {
-      "id" : this.props.selectedArtistForSongsList.id,
-      userId: this.props.selectedArtistForSongsList.userId,
-      songName: this.props.selectedArtistForSongsList.songName,
-      genre: this.props.selectedArtistForSongsList.genre,
-      writer: this.props.selectedArtistForSongsList.writer,
+      "id" : this.props.song.id,
+      userId: this.props.song.userId,
+      songName: this.props.song.songName,
+      genre: this.props.song.genre,
+      writer: this.props.song.writer,
       progression: this.state.progression,
-      url: this.props.selectedArtistForSongsList.url,
-      "notes": this.props.selectedArtistForSongsList.notes
+      url: this.props.song.url,
+      "notes": this.props.song.notes
     }
     this.props.addToJson({
-      "putId" :this.props.selectedArtistForSongsList.id,
+      "putId" :this.props.song.id,
       "dataSet" : "songs",
       "fetchType" : "PUT",
       "dataBaseObject" : songUpdate
       });
-    this.props.specificSongForSongSpecific(songUpdate)
+    this.props.specificSongForSongSpecificFunc(songUpdate)
     this.setState({editProgression: false})
   }
   render() {
     return (
       <section className="progressionForSong">
-      {this.props.selectedArtistForSongsList.progression === "" ?
+      {this.props.song.progression === "" ?
       <Button onClick={this.progressionEditing} variant="dark">Add Chords</Button>:
         <h4>Chord Chart:
           <p href="#" className="edit-name" onClick={this.progressionEditing}>   editChart
           </p>
         </h4>}
-        {!this.state.editProgression ? <h2>{this.props.selectedArtistForSongsList.progression}</h2> :
+        {!this.state.editProgression ? <h2>{this.props.song.progression}</h2> :
           <InputGroup>
             <InputGroup.Prepend>
               <Button variant="dark" onClick={this.saveProgression}>Save Changes</Button>

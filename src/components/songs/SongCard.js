@@ -3,6 +3,7 @@ import Card from 'react-bootstrap/Card'
 import FormControl from 'react-bootstrap/FormControl'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Button from 'react-bootstrap/Button'
+import { Link } from "react-router-dom"
 
 export default class SongCard extends Component {
   state = {
@@ -47,7 +48,7 @@ saveNewSongName = () => {
   "dataBaseObject" : songUpdate
   });
 
-  this.props.specificSongForSongSpecific(songUpdate)
+  this.props.specificSongForSongSpecificFunc(songUpdate)
   this.setState({editSongName: false})
 }
 
@@ -67,11 +68,13 @@ saveNewSongName = () => {
             <FormControl aria-describedby="basic-addon1" id="songName" value={this.state.songName} onChange={this.handleFieldChange} />
           </InputGroup>
         : <Card.Title>{this.props.song.songName}<p className="edit-name" onClick={this.songNameChange}>   editSongTitle</p></Card.Title>}
+        <Link to={`/specificsong/${this.props.selectedArtistForSongsList}/${this.props.song.id}`}>
             <Button
               onClick={this.toSpecificSong}
               variant="dark">
                 Work This Song
             </Button>
+            </Link>
             <Button variant="outline-secondary" onClick={this.songToDelete}>Delete Song</Button>
         </Card.Body>
       </Card>
