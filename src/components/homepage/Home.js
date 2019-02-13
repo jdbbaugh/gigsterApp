@@ -123,7 +123,7 @@ export default class Home extends Component {
             artist={artist}
             speciifyArtistIdToEdit={speciifyArtistIdToEdit}
             artistIdForEditing={this.state.artistIdForEditing}
-            addtojson={this.props.addToJson}
+            addToJson={this.props.addToJson}
             artistSelectedByUser={this.props.artistSelectedByUser}
             deleteArtistFromJson={this.props.deleteArtistFromJson}
             />
