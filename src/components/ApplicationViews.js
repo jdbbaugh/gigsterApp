@@ -19,7 +19,7 @@ export default class ApplicationViews extends Component {
     this.setState({selectedArtistForSongsList: selectedArtist})
   }
 
-  specificSongForSongSpecific = selectedSong => {
+  specificSongForSongSpecificFunc = selectedSong => {
     this.setState({specificSongForSongSpecific: selectedSong})
   }
 
@@ -85,7 +85,7 @@ this.props.addToJson({
     } else {
       return <Redirect to='/' />
     }}}/>
-  <Route path="/songs" render={props => {
+  <Route path="/songs/:artistId(\d+)" render={props => {
     if (this.isAuthenticated()) {
     return <SongsList
       {...props}
@@ -95,16 +95,19 @@ this.props.addToJson({
       artistToSongs={this.props.artistToSongs}
       addToJson={this.props.addToJson}
       selectedArtistForSongsList={this.state.selectedArtistForSongsList}
-      specificSongForSongSpecific={this.specificSongForSongSpecific}
-      deleteSongFromJson={this.deleteSongFromJson} />
+      specificSongForSongSpecificFunc={this.specificSongForSongSpecificFunc}
+      deleteSongFromJson={this.deleteSongFromJson}
+      sets={this.props.sets} />
     } else {
       return <Redirect to='/' />
     }}}/>
-  <Route path="/specificsong" render={props => {
+  <Route path="/specificsong/:artistId(\d+)/:songId(\d+)" render={props => {
     if (this.isAuthenticated()) {
     return <SongSpecific
+    {...props}
+    artists={this.props.artists}
     selectedArtistForSongsList={this.state.specificSongForSongSpecific}
-    specificSongForSongSpecific={this.specificSongForSongSpecific}
+    specificSongForSongSpecificFunc={this.specificSongForSongSpecificFunc}
     addToJson={this.props.addToJson}
     songs={this.props.songs}
     artistSelectedByUser={this.artistSelectedByUser} />

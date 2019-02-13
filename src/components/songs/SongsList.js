@@ -3,7 +3,7 @@
 
 import React, { Component } from 'react';
 import SongCard from "./SongCard"
-import Setlist from '../setlist/Setlist'
+// import Setlist from '../setlist/Setlist'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -126,7 +126,7 @@ artistToSongConundrum = (newSongInfo) => {
 }
 
 
-export default class Home extends Component {
+export default class SongsList extends Component {
   constructor(...args) {
     super(...args)
 
@@ -135,18 +135,23 @@ export default class Home extends Component {
       artistIdForEditing: 0
     };
   }
+
+
   sendToSongSpecific = (songIdForSecificity) => {
     // console.log(songIdForSecificity)
-    this.props.specificSongForSongSpecific(songIdForSecificity)
-    this.props.history.push("/specificsong")
+    this.props.specificSongForSongSpecificFunc(songIdForSecificity)
+    // this.props.history.push("/specificsong")
   }
   render() {
+    const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
+    console.log(artist)
+
     let modalClose = () => this.setState({ modalShow: false });
     let sessionUserId = Number(sessionStorage.getItem("user"));
     // console.log("Home",sessionUserId);
 
     const speciifySongIdToEdit = (artistId) => {
-      // console.log(artistId, sessionUserId);
+      console.log(this.props.match.params)
       this.setState({artistIdForEditing: artistId})
       // this will be to edit stuff in the song specific json so keep it for now
     }
@@ -158,7 +163,8 @@ export default class Home extends Component {
           <Button variant="secondary" size="lg" block>Return to All Artists</Button>
         </Link>
 
-        <Setlist />
+        {/* <Setlist
+        sets={this.props.sets} /> */}
 
         <MyVerticallyCenteredModalSongs
             show={this.state.modalShow}
@@ -179,8 +185,9 @@ export default class Home extends Component {
               artistToSongs={this.props.artistToSongs}
               addToJson={this.props.addToJson}
               speciifySongIdToEdit={speciifySongIdToEdit}
-              selectedArtistForSongsList={this.props.selectedArtistForSongsList}
+              selectedArtistForSongsList={artist.id}
               deleteSongFromJson={this.props.deleteSongFromJson}
+              specificSongForSongSpecificFunc={this.props.specificSongForSongSpecificFunc}
               />
               } else {
                 return null
