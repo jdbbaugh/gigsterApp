@@ -19,7 +19,7 @@ export default class ApplicationViews extends Component {
     this.setState({selectedArtistForSongsList: selectedArtist})
   }
 
-  specificSongForSongSpecific = selectedSong => {
+  specificSongForSongSpecificFunc = selectedSong => {
     this.setState({specificSongForSongSpecific: selectedSong})
   }
 
@@ -95,7 +95,7 @@ this.props.addToJson({
       artistToSongs={this.props.artistToSongs}
       addToJson={this.props.addToJson}
       selectedArtistForSongsList={this.state.selectedArtistForSongsList}
-      specificSongForSongSpecific={this.specificSongForSongSpecific}
+      specificSongForSongSpecificFunc={this.specificSongForSongSpecificFunc}
       deleteSongFromJson={this.deleteSongFromJson}
       sets={this.props.sets} />
     } else {
@@ -107,7 +107,7 @@ this.props.addToJson({
     {...props}
     artists={this.props.artists}
     selectedArtistForSongsList={this.state.specificSongForSongSpecific}
-    specificSongForSongSpecific={this.specificSongForSongSpecific}
+    specificSongForSongSpecificFunc={this.specificSongForSongSpecificFunc}
     addToJson={this.props.addToJson}
     songs={this.props.songs}
     artistSelectedByUser={this.artistSelectedByUser} />

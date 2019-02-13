@@ -55,7 +55,7 @@ export default class SongSpecific extends Component {
     "fetchType" : "PUT",
     "dataBaseObject" : songUpdate
     });
-    this.props.specificSongForSongSpecific(songUpdate)
+    this.props.specificSongForSongSpecificFunc(songUpdate)
     this.setState({editUrl: false})
   }
 
@@ -78,7 +78,7 @@ export default class SongSpecific extends Component {
     "dataBaseObject" : songUpdate
     });
 
-    this.props.specificSongForSongSpecific(songUpdate)
+    this.props.specificSongForSongSpecificFunc(songUpdate)
     this.setState({editNote: false})
   }
 
@@ -101,12 +101,13 @@ export default class SongSpecific extends Component {
     "dataBaseObject" : songUpdate
     });
 
-    this.props.specificSongForSongSpecific(songUpdate)
+    this.props.specificSongForSongSpecificFunc(songUpdate)
     this.setState({editSongName: false})
   }
   render() {
     const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
     const song = this.props.songs.find(song => song.id === parseInt(this.props.match.params.songId)) || {}
+
     return (
       <div>
         <Link to="/home">
@@ -135,7 +136,7 @@ export default class SongSpecific extends Component {
           <ChordsForSpecific
           selectedArtistForSongsList={song}
           addToJson={this.props.addToJson}
-          specificSongForSongSpecific={this.props.specificSongForSongSpecific} />
+          specificSongForSongSpecificFunc={this.props.specificSongForSongSpecificFunc} />
         <section className="notesForSong">
           <h3>Notes:
             <p onClick={this.setNoteEditing} className="edit-name">   editNotes

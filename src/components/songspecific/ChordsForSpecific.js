@@ -37,7 +37,7 @@ export default class ChordsForSpecific extends Component {
       "fetchType" : "PUT",
       "dataBaseObject" : songUpdate
       });
-    this.props.specificSongForSongSpecific(songUpdate)
+    this.props.specificSongForSongSpecificFunc(songUpdate)
     this.setState({editProgression: false})
   }
   render() {

@@ -48,7 +48,7 @@ saveNewSongName = () => {
   "dataBaseObject" : songUpdate
   });
 
-  this.props.specificSongForSongSpecific(songUpdate)
+  this.props.specificSongForSongSpecificFunc(songUpdate)
   this.setState({editSongName: false})
 }
 

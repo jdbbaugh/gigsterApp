@@ -139,7 +139,7 @@ export default class SongsList extends Component {
 
   sendToSongSpecific = (songIdForSecificity) => {
     // console.log(songIdForSecificity)
-    this.props.specificSongForSongSpecific(songIdForSecificity)
+    this.props.specificSongForSongSpecificFunc(songIdForSecificity)
     this.props.history.push("/specificsong")
   }
   render() {
@@ -187,7 +187,7 @@ export default class SongsList extends Component {
               speciifySongIdToEdit={speciifySongIdToEdit}
               selectedArtistForSongsList={artist.id}
               deleteSongFromJson={this.props.deleteSongFromJson}
-              specificSongForSongSpecific={this.props.specificSongForSongSpecific}
+              specificSongForSongSpecificFunc={this.props.specificSongForSongSpecificFunc}
               />
               } else {
                 return null
