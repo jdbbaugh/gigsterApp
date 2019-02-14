@@ -22,7 +22,7 @@ class MyVerticallyCenteredModalArtists extends Component {
 
 addNewArtist = evt => {
   evt.preventDefault()
-  this.props.addtojson({
+  this.props.addToJson({
     "dataSet" : "artists",
     "fetchType" : "POST",
     "dataBaseObject": {
