@@ -7,6 +7,8 @@ import Setlist from '../setlist/Setlist'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import InputGroup from 'react-bootstrap/InputGroup'
+import FormControl from 'react-bootstrap/FormControl'
 import { Link } from "react-router-dom"
 
 
@@ -144,6 +146,7 @@ export default class SongsList extends Component {
     this.state = {
       modalShow: false,
       createNewSet: false,
+      songAvailForSetSelection: false,
       artistIdForEditing: 0,
       chosenSet:
         {
@@ -165,6 +168,10 @@ export default class SongsList extends Component {
     console.log("state is", set)
     this.setState({chosenSet: set})
   }
+
+  addSongToSet = () => {
+    this.setState({songAvailForSetSelection: true})
+  }
   render() {
     const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
     console.log(artist)
@@ -185,7 +192,13 @@ export default class SongsList extends Component {
         <Link to="/home">
           <Button variant="secondary" size="lg" block>Return to All Artists</Button>
         </Link>
-        {this.state.createNewSet ? null : <Button onClick={this.newSetToggle} variant="">Create New Set</Button>}
+        {this.state.songAvailForSetSelection ?
+          <InputGroup>
+            <InputGroup.Prepend>
+              <Button variant="dark" onClick={this.saveProgression}>Save Changes</Button>
+            </InputGroup.Prepend>
+            <FormControl as="textarea" id="progression" value={this.state.progression} onChange={this.handleFieldChange} aria-label="With textarea" />
+          </InputGroup> : <Button onClick={this.addSongToSet} variant="">Create New Set</Button>}
         <Setlist
         sets={this.props.sets}
         setChosenSetToState={this.setChosenSetToState}
@@ -205,6 +218,7 @@ export default class SongsList extends Component {
           {this.props.songs.map( song =>{
             if (song.userId === sessionUserId) {
               return <SongCard
+              songAvailForSetSelection={this.state.songAvailForSetSelection}
               chosenSet={this.state.chosenSet}
               key={song.id}
               sendToSongSpecific={this.sendToSongSpecific}

@@ -45,7 +45,7 @@ export default class ChordsForSpecific extends Component {
     return (
       <section className="progressionForSong">
       {this.props.song.progression === "" ?
-      <Button onClick={this.progressionEditing} variant="dark">Add Chords</Button>:
+      <Button onClick={this.progressionEditing} variant="dark">Add Chords</Button> :
         <h4>Chord Chart:
           <p href="#" className="edit-name" onClick={this.progressionEditing}>   editChart
           </p>

@@ -75,7 +75,7 @@ saveNewSongName = () => {
                 Work This Song
             </Button>
             </Link>
-            <Button variant="outline-secondary" onClick={this.songToDelete}>Delete Song</Button>
+            {this.props.songAvailForSetSelection ? <Button variant="danger">Add To Set</Button> : <Button variant="outline-secondary" onClick={this.songToDelete}>Delete Song</Button>}
         </Card.Body>
       </Card>
       </React.Fragment>
