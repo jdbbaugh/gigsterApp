@@ -197,7 +197,7 @@ export default class SongsList extends Component {
             <InputGroup.Prepend>
               <Button variant="dark" onClick={this.saveProgression}>Save Changes</Button>
             </InputGroup.Prepend>
-            <FormControl as="textarea" id="progression" value={this.state.progression} onChange={this.handleFieldChange} aria-label="With textarea" />
+            <FormControl as="textarea" placeholder="Name Of New Set" id="progression" value={this.state.progression} onChange={this.handleFieldChange} aria-label="With textarea" />
           </InputGroup> : <Button onClick={this.addSongToSet} variant="">Create New Set</Button>}
         <Setlist
         sets={this.props.sets}
