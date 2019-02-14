@@ -200,7 +200,8 @@ export default class SongsList extends Component {
         <SongNewSet
         songAvailForSetSelection={this.state.songAvailForSetSelection}
         addSongToSet={this.addSongToSet}
-        saveNewSet={this.saveNewSet} />
+        saveNewSet={this.saveNewSet}
+        addToJson={this.props.addToJson} />
 
         <Setlist
         sets={this.props.sets}

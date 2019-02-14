@@ -8,11 +8,16 @@ import { Link } from "react-router-dom"
 export default class SongCard extends Component {
   state = {
     editSongName: false,
-    songName: this.props.song.songName
+    songName: this.props.song.songName,
+    toSetConfirmed: false
   }
 
   toSpecificSong = evt => {
     this.props.sendToSongSpecific(this.props.song)
+  }
+
+  toSetConfirmedToggle = () => {
+    this.setState({toSetConfirmed: true})
   }
 
 songToDelete = () => {
@@ -75,7 +80,7 @@ saveNewSongName = () => {
                 Work This Song
             </Button>
             </Link>
-            {this.props.songAvailForSetSelection ? <Button variant="danger">Add To Set</Button> : <Button variant="outline-secondary" onClick={this.songToDelete}>Delete Song</Button>}
+            {this.props.songAvailForSetSelection ? this.state.toSetConfirmed ? <Button variant="danger" disabled>Added</Button> : <Button variant="danger" onClick={this.toSetConfirmedToggle}>Add To Set</Button> : <Button variant="outline-secondary" onClick={this.songToDelete}>Delete Song</Button>}
         </Card.Body>
       </Card>
       </React.Fragment>
