@@ -3,12 +3,11 @@
 
 import React, { Component } from 'react';
 import SongCard from "./SongCard"
+import SongNewSet from "./SongNewSet"
 import Setlist from '../setlist/Setlist'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import InputGroup from 'react-bootstrap/InputGroup'
-import FormControl from 'react-bootstrap/FormControl'
 import { Link } from "react-router-dom"
 
 
@@ -172,6 +171,11 @@ export default class SongsList extends Component {
   addSongToSet = () => {
     this.setState({songAvailForSetSelection: true})
   }
+
+  saveNewSet = () => {
+    console.log("saved a new set wow")
+    this.setState({songAvailForSetSelection: false})
+  };
   render() {
     const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
     console.log(artist)
@@ -192,13 +196,12 @@ export default class SongsList extends Component {
         <Link to="/home">
           <Button variant="secondary" size="lg" block>Return to All Artists</Button>
         </Link>
-        {this.state.songAvailForSetSelection ?
-          <InputGroup>
-            <InputGroup.Prepend>
-              <Button variant="dark" onClick={this.saveProgression}>Save Changes</Button>
-            </InputGroup.Prepend>
-            <FormControl as="textarea" placeholder="Name Of New Set" id="progression" value={this.state.progression} onChange={this.handleFieldChange} aria-label="With textarea" />
-          </InputGroup> : <Button onClick={this.addSongToSet} variant="">Create New Set</Button>}
+
+        <SongNewSet
+        songAvailForSetSelection={this.state.songAvailForSetSelection}
+        addSongToSet={this.addSongToSet}
+        saveNewSet={this.saveNewSet} />
+
         <Setlist
         sets={this.props.sets}
         setChosenSetToState={this.setChosenSetToState}
