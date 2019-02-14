@@ -65,7 +65,7 @@ export default class Register extends Component {
                     </div>
                     <div className="form-group">
                         <label htmlFor="Password">Password:</label>
-                        <input type="text" required onChange={this.handleFieldChange} id="password"
+                        <input type="password" required onChange={this.handleFieldChange} id="password"
                         placeholder="Enter password here"/>
                     </div>
                     <button type="submit" className=" btn btn-register" onClick={this.fetchThoseUsers}> Register </button>
