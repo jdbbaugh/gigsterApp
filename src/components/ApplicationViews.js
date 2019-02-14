@@ -42,10 +42,31 @@ this.props.addToJson({
 })
   }
 
+  deleteArtistLibrary = (toDelete) => {
+    console.log("deleting", toDelete)
+
+      let deleteSongFromArtistToSong = this.props.artistToSongs.filter(artistToSong => artistToSong.songId === toDelete);
+      // console.log("artistToSong", deleteSongFromArtistToSong.songId, deleteSongFromArtistToSong.id );
+      Promise.all(deleteSongFromArtistToSong.map(artistToSong => {this.props.addToJson({
+        "deleteId" : artistToSong.id,
+        "dataSet" : "artistToSongs",
+        "fetchType" : "DELETE"
+
+      })}
+      ))
+      .then(() => {
+      this.props.addToJson({
+        "deleteId" : toDelete,
+        "dataSet" : "songs",
+        "fetchType" : "DELETE"
+      })
+      })
+  };
+
   deleteArtistFromJson = (toDelete) => {
     console.log("deleting Artist", toDelete);
     toDelete.artistToSongs.forEach(artistToSong => {
-      this.deleteSongFromJson(artistToSong.songId);
+      this.deleteArtistLibrary(artistToSong.songId);
     })
     this.props.addToJson({
 
