@@ -56,8 +56,7 @@ render() {
         <React.Fragment>
             <div className="sidenav">
             <div className="login-main-text">
-                <h2>Welcome</h2>
-                <p>Login or register here</p>
+                <h2 className="logo-color">-Gigster-</h2>
             </div>
             </div>
             <div className="main">
