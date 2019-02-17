@@ -151,9 +151,14 @@ export default class SongsList extends Component {
         {
           "id": 1,
           "setName": "All Songs"
-        }
+        },
+     songsForNewSet: []
 
     };
+  }
+
+  recieveSongsForNewSet = (songObject) => {
+    this.setState({songsForNewSet: songObject})
   }
 
 
@@ -222,6 +227,7 @@ export default class SongsList extends Component {
           {this.props.songs.map( song =>{
             if (song.userId === sessionUserId) {
               return <SongCard
+              recieveSongsForNewSet={this.recieveSongsForNewSet}
               songAvailForSetSelection={this.state.songAvailForSetSelection}
               chosenSet={this.state.chosenSet}
               key={song.id}

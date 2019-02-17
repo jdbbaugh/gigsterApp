@@ -18,6 +18,7 @@ export default class SongCard extends Component {
 
   toSetConfirmedToggle = () => {
     this.setState({toSetConfirmed: true})
+    this.props.recieveSongsForNewSet(this.props.song)
   }
 
 songToDelete = () => {
