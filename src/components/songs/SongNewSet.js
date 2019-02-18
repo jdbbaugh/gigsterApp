@@ -21,8 +21,8 @@ export default class SongNewSet extends Component {
     "fetchType" : "POST",
     "dataBaseObject" : {setName: this.state.setName}
     })
-    .then(response => console.log(response))
-    this.props.saveNewSet()
+    .then(response => this.props.saveNewSet(response.id))
+
   }
 
   render() {

@@ -177,15 +177,17 @@ export default class SongsList extends Component {
     this.setState({songAvailForSetSelection: true})
   }
 
-  saveNewSet = () => {
-    console.log("saved a new set wow")
+  saveNewSet = (newSetNumber) => {
+    console.log("saved a new set wow", newSetNumber)
+
+
 
 this.state.songsForNewSet.forEach(song => {
   const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
   let songToArtistSetUpdate = {
     "songId": song.id,
     "artistId": artist.id,
-    "setId": 6,
+    "setId": newSetNumber,
   }
   this.props.addToJson({
   "dataSet" : "artistToSongs",
