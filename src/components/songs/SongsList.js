@@ -158,7 +158,7 @@ export default class SongsList extends Component {
   }
 
   recieveSongsForNewSet = (songObject) => {
-    this.setState({songsForNewSet: songObject})
+    this.state.songsForNewSet.push(songObject)
   }
 
 
@@ -180,10 +180,11 @@ export default class SongsList extends Component {
   saveNewSet = () => {
     console.log("saved a new set wow")
     this.setState({songAvailForSetSelection: false})
+
   };
   render() {
     const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
-    console.log(artist)
+    // console.log(artist)
 
     let modalClose = () => this.setState({ modalShow: false });
     let sessionUserId = Number(sessionStorage.getItem("user"));
