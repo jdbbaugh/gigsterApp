@@ -16,11 +16,12 @@ export default class SongNewSet extends Component {
 
   createdNewSetToJson = () => {
     console.log("youSavedNew Set")
-    this.props.addToJson({
+    this.props.addNewSongToJson({
     "dataSet" : "sets",
     "fetchType" : "POST",
     "dataBaseObject" : {setName: this.state.setName}
-    });
+    })
+    .then(response => console.log(response))
     this.props.saveNewSet()
   }
 
