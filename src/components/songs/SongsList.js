@@ -179,7 +179,23 @@ export default class SongsList extends Component {
 
   saveNewSet = () => {
     console.log("saved a new set wow")
+
+this.state.songsForNewSet.forEach(song => {
+  let songToArtistSetUpdate = {
+    "songId": song.id,
+    "artistId": 5,
+    "setId": 6,
+  }
+  this.props.addToJson({
+  "dataSet" : "artistToSongs",
+  "fetchType" : "POST",
+  "dataBaseObject" : songToArtistSetUpdate
+  });
+
+})
+
     this.setState({songAvailForSetSelection: false})
+    console.log(this.state.songsForNewSet)
 
   };
   render() {
