@@ -49,7 +49,7 @@ export default class ArtistCard extends Component {
               className="edit-name">  editThisName
               </p>
             </Card.Title>
-          <Link to={`/songs/${this.props.artist.id}`}>
+          <Link to={`/songs/${this.props.artist.id}/set/${Number(1)}`}>
             <Button
               variant="dark"
               onClick={this.userSelectedArtist}>

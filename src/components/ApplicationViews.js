@@ -132,7 +132,7 @@ export default class ApplicationViews extends Component {
             return <Redirect to='/' />
           }
         }} />
-        <Route path="/songs/:artistId(\d+)" render={props => {
+        <Route path="/songs/:artistId(\d+)/set/:setId(\d+)" render={props => {
           if (this.isAuthenticated()) {
             return <SongsList
               {...props}

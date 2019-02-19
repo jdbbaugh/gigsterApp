@@ -204,7 +204,9 @@ this.state.songsForNewSet.forEach(song => {
   };
   render() {
     const artist = this.props.artists.find(artist => artist.id === parseInt(this.props.match.params.artistId)) || {}
-    // console.log(artist)
+    const set = this.props.sets.find(set => set.id === parseInt(this.props.match.params.setId)) || {}
+
+    console.log(set)
 
     let modalClose = () => this.setState({ modalShow: false });
     let sessionUserId = Number(sessionStorage.getItem("user"));
@@ -234,7 +236,7 @@ this.state.songsForNewSet.forEach(song => {
         setChosenSetToState={this.setChosenSetToState}
         selectedArtistForSongsList={this.props.selectedArtistForSongsList} />
 
-        <h2 className="setName-title">{this.state.chosenSet.setName}</h2>
+        <h2 className="setName-title">{set.setName}</h2>
         <MyVerticallyCenteredModalSongs
             show={this.state.modalShow}
             onHide={modalClose}
