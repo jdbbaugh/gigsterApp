@@ -60,6 +60,13 @@ export default class ApplicationViews extends Component {
           "dataSet": "artistToSongs",
           "fetchType": "DELETE"
         })
+        .then(() => {
+          this.props.addToJson({
+            "deleteId": toDelete,
+            "dataSet": "songs",
+            "fetchType": "DELETE"
+          })
+        })
       })
       } else {
       this.props.addToJson({
