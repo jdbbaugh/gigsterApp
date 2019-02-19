@@ -45,52 +45,60 @@ export default class ApplicationViews extends Component {
   deleteArtistLibrary = (toDelete) => {
     console.log("deleting", toDelete)
 
-    let deleteSongFromArtistToSong = this.props.artistToSongs.filter(artistToSong => artistToSong.songId === toDelete);
-    // console.log("artistToSong", deleteSongFromArtistToSong.songId, deleteSongFromArtistToSong.id );
-    return Promise.all(deleteSongFromArtistToSong.map(artistToSong => {
-      if (artistToSong.setId > 1 && this.props.sets.find(set => set.id === artistToSong.setId)) {
+    if (toDelete.setId > 1 && this.props.sets.find(set => set.id === toDelete.setId)) {
       this.props.addToJson({
-        "deleteId": artistToSong.setId,
+        "deleteId": toDelete.setId,
         "dataSet": "sets",
         "fetchType": "DELETE"
       })
       .then(() => {
-        this.props.addToJson({
-          "deleteId": artistToSong.id,
-          "dataSet": "artistToSongs",
-          "fetchType": "DELETE"
-        })
-        .then(() => {
+        if (this.props.songs.find(song => song.id === toDelete.songId)) {
           this.props.addToJson({
-            "deleteId": toDelete,
-            "dataSet": "songs",
+          "deleteId": toDelete.songId,
+          "dataSet": "songs",
+          "fetchType": "DELETE"
+          })
+          .then(() => {
+            this.props.addToJson({
+            "deleteId": toDelete.id,
+            "dataSet": "artistToSongs",
+            "fetchType": "DELETE"
+            })
+          })
+        } else {
+          this.props.addToJson({
+            "deleteId": toDelete.id,
+            "dataSet": "artistToSongs",
             "fetchType": "DELETE"
           })
-        })
+        }
       })
-      } else {
+    } else if (this.props.songs.find(song => song.id === toDelete.songId)) {
       this.props.addToJson({
-        "deleteId": artistToSong.id,
-        "dataSet": "artistToSongs",
+        "deleteId": toDelete.songId,
+        "dataSet": "songs",
         "fetchType": "DELETE"
       })
       .then(() => {
         this.props.addToJson({
-          "deleteId": toDelete,
-          "dataSet": "songs",
+          "deleteId": toDelete.id,
+          "dataSet": "artistToSongs",
           "fetchType": "DELETE"
         })
       })
-      }
-      }
-    ))
-
+    } else {
+      this.props.addToJson({
+        "deleteId": toDelete.id,
+        "dataSet": "artistToSongs",
+        "fetchType": "DELETE"
+      })
+    }
   };
 
   deleteArtistFromJson = (toDelete) => {
     console.log("deleting Artist", toDelete);
     Promise.all(toDelete.artistToSongs.map(artistToSong =>
-      this.deleteArtistLibrary(artistToSong.songId)
+      this.deleteArtistLibrary(artistToSong)
     ))
     .then(() => {
     this.props.addToJson({
