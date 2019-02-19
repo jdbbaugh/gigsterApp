@@ -153,6 +153,7 @@ export default class ApplicationViews extends Component {
           if (this.isAuthenticated()) {
             return <SongSpecific
               {...props}
+              sets={this.props.sets}
               artists={this.props.artists}
               selectedArtistForSongsList={this.state.specificSongForSongSpecific}
               specificSongForSongSpecificFunc={this.specificSongForSongSpecificFunc}
