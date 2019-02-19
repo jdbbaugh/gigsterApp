@@ -9,7 +9,11 @@ export default class Setlist extends Component {
     <Dropdown>
       <DropdownButton id="dropdown-item-button" variant="" title="Choose SetList">
         {this.props.sets.map(set =>
-          <SetCard key={set.id} set={set} selectedArtistForSongsList={this.props.selectedArtistForSongsList} setChosenSetToState={this.props.setChosenSetToState} />)}
+          <SetCard
+          key={set.id}
+          set={set}
+          selectedArtistForSongsList={this.props.selectedArtistForSongsList}
+          setChosenSetToState={this.props.setChosenSetToState} />)}
       </DropdownButton>
     </Dropdown>
     )

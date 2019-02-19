@@ -146,13 +146,14 @@ export default class SongsList extends Component {
       modalShow: false,
       createNewSet: false,
       songAvailForSetSelection: false,
+      toSetConfirmed: false,
       artistIdForEditing: 0,
       chosenSet:
         {
           "id": 1,
           "setName": "All Songs"
         },
-     songsForNewSet: []
+      songsForNewSet: []
 
     };
   }

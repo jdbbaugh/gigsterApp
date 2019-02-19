@@ -80,11 +80,12 @@ saveNewSongName = () => {
               variant="dark">
                 Work This Song
             </Button>
-            </Link>
-            {this.props.songAvailForSetSelection ? this.state.toSetConfirmed ?
-            <Button variant="danger" disabled>Added</Button>
-            :
-            <Button variant="danger" onClick={this.toSetConfirmedToggle}>Add To Set</Button>
+        </Link>
+            {this.props.songAvailForSetSelection ?
+              this.state.toSetConfirmed ?
+                <Button variant="danger" disabled>Added</Button>
+                :
+                <Button variant="danger" onClick={this.toSetConfirmedToggle}>Add To Set</Button>
             :
             <Button variant="outline-secondary" onClick={this.songToDelete}>Delete Song</Button>}
         </Card.Body>

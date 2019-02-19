@@ -47,11 +47,6 @@ export default class ApplicationViews extends Component {
 
     let deleteSongFromArtistToSong = this.props.artistToSongs.filter(artistToSong => artistToSong.songId === toDelete);
     // console.log("artistToSong", deleteSongFromArtistToSong.songId, deleteSongFromArtistToSong.id );
-
-    let deleteArtistSets = this.props.sets.filter(set => set.id === deleteSongFromArtistToSong.find(artistToSong => artistToSong.id === set.id));
-    console.log(deleteArtistSets)
-
-    // console.log(deleteArtistSets)
     return Promise.all(deleteSongFromArtistToSong.map(artistToSong =>
       this.props.addToJson({
         "deleteId": artistToSong.id,

@@ -31,7 +31,7 @@ export default class SongNewSet extends Component {
         {this.props.songAvailForSetSelection ?
           <InputGroup>
             <InputGroup.Prepend>
-              <Button variant="dark" onClick={this.createdNewSetToJson}>Save New Set</Button>
+              <Button variant="danger" onClick={this.createdNewSetToJson}>Save New Set</Button>
             </InputGroup.Prepend>
             <FormControl as="textarea" placeholder="Name Of New Set" id="setName"  onChange={this.handleFieldChange} aria-label="With textarea" />
           </InputGroup> : <Button onClick={this.props.addSongToSet} variant="">Create New Set</Button>}

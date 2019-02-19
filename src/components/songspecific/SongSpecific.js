@@ -17,6 +17,7 @@ export default class SongSpecific extends Component {
 
     return (
       <React.Fragment>
+        <div className="songSpecific-container">
         <HeaderForSpecific
         artist={artist} />
         <TitlesForSpecific
@@ -41,6 +42,7 @@ export default class SongSpecific extends Component {
           song={song}
           addToJson={this.props.addToJson}
           specificSongForSongSpecificFunc={this.props.specificSongForSongSpecificFunc} />
+          </div>
       </React.Fragment>
     )
   }
