@@ -47,14 +47,26 @@ export default class ApplicationViews extends Component {
 
     let deleteSongFromArtistToSong = this.props.artistToSongs.filter(artistToSong => artistToSong.songId === toDelete);
     // console.log("artistToSong", deleteSongFromArtistToSong.songId, deleteSongFromArtistToSong.id );
-    return Promise.all(deleteSongFromArtistToSong.map(artistToSong =>
+    return Promise.all(deleteSongFromArtistToSong.map(artistToSong => {
+      if (artistToSong.setId > 1 && this.props.sets.find(set => set.id === artistToSong.setId)) {
+      this.props.addToJson({
+        "deleteId": artistToSong.setId,
+        "dataSet": "sets",
+        "fetchType": "DELETE"
+      })
+      .then(() => {
+        this.props.addToJson({
+          "deleteId": artistToSong.id,
+          "dataSet": "artistToSongs",
+          "fetchType": "DELETE"
+        })
+      })
+      } else {
       this.props.addToJson({
         "deleteId": artistToSong.id,
         "dataSet": "artistToSongs",
         "fetchType": "DELETE"
-
       })
-    ))
       .then(() => {
         this.props.addToJson({
           "deleteId": toDelete,
@@ -62,6 +74,10 @@ export default class ApplicationViews extends Component {
           "fetchType": "DELETE"
         })
       })
+      }
+      }
+    ))
+
   };
 
   deleteArtistFromJson = (toDelete) => {
