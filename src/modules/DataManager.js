@@ -24,7 +24,7 @@ export default {
 				return fetch(`${remoteURL}/${dataSet}/${putId}`, {method: `${fetchType}`,headers: {"Content-Type": "application/json; charset=utf-8",},body: JSON.stringify(dataBaseObject),}).then(r => r.json())
 
 			case "DELETE":
-				return fetch(`${remoteURL}/${dataSet}/${deleteId}`, {method: `${fetchType}`,}).then(r => r.json())
+				return fetch(`${remoteURL}/${dataSet}/${deleteId}`, {method: `${fetchType}`,})
 
 			default:
 			break;

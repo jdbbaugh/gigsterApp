@@ -29,84 +29,136 @@ export default class ApplicationViews extends Component {
     let deleteSongFromArtistToSong = this.props.artistToSongs.find(artistToSong => artistToSong.songId === toDelete);
     // console.log("artistToSong", deleteSongFromArtistToSong.songId, deleteSongFromArtistToSong.id );
     this.props.addToJson({
-      "deleteId": deleteSongFromArtistToSong.id,
-      "dataSet": "artistToSongs",
+      "deleteId": toDelete,
+      "dataSet": "songs",
       "fetchType": "DELETE"
 
     }).then(() => {
       this.props.addToJson({
-        "deleteId": toDelete,
-        "dataSet": "songs",
+        "deleteId": deleteSongFromArtistToSong.id,
+        "dataSet": "artistToSongs",
         "fetchType": "DELETE"
       });
     })
   }
 
+
+
+
+
   deleteArtistLibrary = (toDelete) => {
     console.log("deleting", toDelete)
 
-    if (toDelete.setId > 1 && this.props.sets.find(set => set.id === toDelete.setId)) {
-      this.props.addToJson({
-        "deleteId": toDelete.setId,
-        "dataSet": "sets",
-        "fetchType": "DELETE"
-      })
-      .then(() => {
-        if (this.props.songs.find(song => song.id === toDelete.songId)) {
-          this.props.addToJson({
-          "deleteId": toDelete.songId,
-          "dataSet": "songs",
-          "fetchType": "DELETE"
-          })
-          .then(() => {
-            this.props.addToJson({
-            "deleteId": toDelete.id,
-            "dataSet": "artistToSongs",
-            "fetchType": "DELETE"
-            })
-          })
-        } else {
-          this.props.addToJson({
-            "deleteId": toDelete.id,
-            "dataSet": "artistToSongs",
-            "fetchType": "DELETE"
-          })
-        }
-      })
-    } else if (this.props.songs.find(song => song.id === toDelete.songId)) {
-      this.props.addToJson({
-        "deleteId": toDelete.songId,
-        "dataSet": "songs",
-        "fetchType": "DELETE"
-      })
-      .then(() => {
-        this.props.addToJson({
-          "deleteId": toDelete.id,
-          "dataSet": "artistToSongs",
-          "fetchType": "DELETE"
-        })
-      })
-    } else {
-      this.props.addToJson({
-        "deleteId": toDelete.id,
-        "dataSet": "artistToSongs",
-        "fetchType": "DELETE"
-      })
-    }
+    // if (toDelete.setId > 1 && this.props.sets.find(set => set.id === toDelete.setId)) {
+    //   this.props.addToJson({
+    //     "deleteId": toDelete.setId,
+    //     "dataSet": "sets",
+    //     "fetchType": "DELETE"
+    //   })
+    //   .then(() => {
+    //     if (this.props.songs.find(song => song.id === toDelete.songId)) {
+    //       this.props.addToJson({
+    //       "deleteId": toDelete.songId,
+    //       "dataSet": "songs",
+    //       "fetchType": "DELETE"
+    //       })
+    //       .then(() => {
+    //         this.props.addToJson({
+    //         "deleteId": toDelete.id,
+    //         "dataSet": "artistToSongs",
+    //         "fetchType": "DELETE"
+    //         })
+    //       })
+    //     } else {
+    //       this.props.addToJson({
+    //         "deleteId": toDelete.id,
+    //         "dataSet": "artistToSongs",
+    //         "fetchType": "DELETE"
+    //       })
+    //     }
+    //   })
+    // } else if (this.props.songs.find(song => song.id === toDelete.songId)) {
+    //   this.props.addToJson({
+    //     "deleteId": toDelete.songId,
+    //     "dataSet": "songs",
+    //     "fetchType": "DELETE"
+    //   })
+    //   .then(() => {
+    //     this.props.addToJson({
+    //       "deleteId": toDelete.id,
+    //       "dataSet": "artistToSongs",
+    //       "fetchType": "DELETE"
+    //     })
+    //   })
+    // } else {
+    //   this.props.addToJson({
+    //     "deleteId": toDelete.id,
+    //     "dataSet": "artistToSongs",
+    //     "fetchType": "DELETE"
+    //   })
+    // }
   };
 
   deleteArtistFromJson = (toDelete) => {
     console.log("deleting Artist", toDelete);
-    Promise.all(toDelete.artistToSongs.map(artistToSong =>
-      this.deleteArtistLibrary(artistToSong)
-    ))
-    .then(() => {
-    this.props.addToJson({
-      "deleteId": toDelete.id,
-      "dataSet": "artists",
-      "fetchType": "DELETE"
-    });
-  })
+    let songsToDelete = [];
+    let setsToDelete = [];
+    let artistToSongToDelete = [];
+
+    toDelete.artistToSongs.forEach(artistToSong => {
+      if (artistToSong.setId > 1) {
+        setsToDelete.push(artistToSong.setId)
+    }
+
+      songsToDelete.push(artistToSong.songId)
+      artistToSongToDelete.push(artistToSong.id)
+
+    })
+    console.log(songsToDelete, setsToDelete)
+    this.promiseForDeleteArtistToSongs(artistToSongToDelete, 0)
+    .then(() => console.log("resolved"))
+    //artistToSonglistaRray sent to a function that will allow the needed function to return a promise upon completion
+
+  //   Promise.all(toDelete.artistToSongs.map(artistToSong =>
+  //     this.deleteArtistLibrary(artistToSong)
+  //   ))
+  //   .then(() => {
+  //   this.props.addToJson({
+  //     "deleteId": toDelete.id,
+  //     "dataSet": "artists",
+  //     "fetchType": "DELETE"
+  //   });
+  // })
+  }
+
+  deleteArtistToSongs = (artistToSongsIds, artistToSongIndex, resolve) => {
+    console.log(artistToSongsIds,"index",artistToSongIndex)
+    if (artistToSongIndex < artistToSongsIds.length) {
+      let indexToDelete = artistToSongsIds[artistToSongIndex]
+      this.props.addNewSongToJson({
+        "deleteId": indexToDelete,
+        "dataSet": "artistToSongs",
+        "fetchType": "DELETE"
+      }).then(() => {
+        // setTimeout(() => this.deleteArtistToSongs(artistToSongsIds, artistToSongIndex + 1 ), 35)
+        console.log("success")
+        this.deleteArtistToSongs(artistToSongsIds, artistToSongIndex + 1, resolve )
+    })
+    .catch(() => {
+      console.log("failed")
+      this.deleteArtistToSongs(artistToSongsIds, artistToSongIndex, resolve)
+    })
+    } else {
+      console.log("all artistToSongs Deleted");
+      resolve()
+    }
+  }
+
+  //Here we pass deleted artistToSongs array so that it will be able to send back promise upon accomplishing of deleteArtistToSongs
+  promiseForDeleteArtistToSongs = (artistToSongsIds, artistToSongIndex) => {
+    return new Promise((resolve, reject) => {
+      this.deleteArtistToSongs(artistToSongsIds, artistToSongIndex, resolve)
+    } )
   }
 
 
