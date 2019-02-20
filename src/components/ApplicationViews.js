@@ -130,7 +130,7 @@ export default class ApplicationViews extends Component {
   //   });
   // })
   }
-
+//from promiseForDeleteArtistToSongs function we get all the needed data plus resolve so that function can declare promise resolution
   deleteArtistToSongs = (artistToSongsIds, artistToSongIndex, resolve) => {
     console.log(artistToSongsIds,"index",artistToSongIndex)
     if (artistToSongIndex < artistToSongsIds.length) {
@@ -140,7 +140,7 @@ export default class ApplicationViews extends Component {
         "dataSet": "artistToSongs",
         "fetchType": "DELETE"
       }).then(() => {
-        // setTimeout(() => this.deleteArtistToSongs(artistToSongsIds, artistToSongIndex + 1 ), 35)
+        // setTimeout(() => this.deleteArtistToSongs(artistToSongsIds, artistToSongIndex + 1 ), 35) ...this cheat technically works but doesnt provide a promise return to function that called this function
         console.log("success")
         this.deleteArtistToSongs(artistToSongsIds, artistToSongIndex + 1, resolve )
     })
@@ -153,6 +153,9 @@ export default class ApplicationViews extends Component {
       resolve()
     }
   }
+  //if json fails catch will restart the process at the failing point when all artistToSongs are deleted
+  //then resolve will let promiseForDeleteArtistToSongs return a fulfilled promise to deleteArtistFromJson function
+
 
   //Here we pass deleted artistToSongs array so that it will be able to send back promise upon accomplishing of deleteArtistToSongs
   promiseForDeleteArtistToSongs = (artistToSongsIds, artistToSongIndex) => {
@@ -160,6 +163,7 @@ export default class ApplicationViews extends Component {
       this.deleteArtistToSongs(artistToSongsIds, artistToSongIndex, resolve)
     } )
   }
+  //now its sent to the deleteArtistToSongs function with the addition of resolve from new Promise method... this will allow it to send a resolved promise later
 
 
 
