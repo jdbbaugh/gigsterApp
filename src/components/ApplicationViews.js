@@ -132,7 +132,7 @@ export default class ApplicationViews extends Component {
         obj[item]++;
         return obj;
       }, {})
-      // console.log(Object.keys(setsReduced), Object.keys(songsReduced))
+
       this.promiseForDeleteSetsAndSongsProvidedByArtToSong(Object.keys(setsReduced), 0, Object.keys(songsReduced), 0)
       .then(() => {
         console.log("yesssssss!!!!!!")
@@ -143,22 +143,9 @@ export default class ApplicationViews extends Component {
         })
       })
     })
-    //artistToSonglistaRray sent to a function that will allow the needed function to return a promise upon completion
-
-  //   Promise.all(toDelete.artistToSongs.map(artistToSong =>
-  //     this.deleteArtistLibrary(artistToSong)
-  //   ))
-  //   .then(() => {
-  //   this.props.addToJson({
-  //     "deleteId": toDelete.id,
-  //     "dataSet": "artists",
-  //     "fetchType": "DELETE"
-  //   });
-  // })
-  }
+  };
 
   deleteSetsAndSongsProvidedByArtToSong = (setsArray, setsIndex, songsArray, songsIndex, resolve) => {
-    console.log(setsArray, setsIndex)
     if (setsIndex < setsArray.length) {
       let setToDelete = setsArray[setsIndex]
       this.props.addNewSongToJson({
