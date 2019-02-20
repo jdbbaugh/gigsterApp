@@ -116,7 +116,33 @@ export default class ApplicationViews extends Component {
     })
     console.log(songsToDelete, setsToDelete)
     this.promiseForDeleteArtistToSongs(artistToSongToDelete, 0)
-    .then(() => console.log("resolved"))
+    .then(() => {
+      console.log("resolved artistToSong deletion")
+      const setsReduced = setsToDelete.reduce(function(obj, item) {
+        if(!obj[item]) {
+          obj[item] = 0;
+        }
+        obj[item]++;
+        return obj;
+      }, {})
+      const songsReduced = songsToDelete.reduce(function(obj, item) {
+        if(!obj[item]) {
+          obj[item] = 0;
+        }
+        obj[item]++;
+        return obj;
+      }, {})
+      // console.log(Object.keys(setsReduced), Object.keys(songsReduced))
+      this.promiseForDeleteSetsAndSongsProvidedByArtToSong(Object.keys(setsReduced), 0, Object.keys(songsReduced), 0)
+      .then(() => {
+        console.log("yesssssss!!!!!!")
+        this.props.addToJson({
+          "deleteId": toDelete.id,
+          "dataSet": "artists",
+          "fetchType": "DELETE"
+        })
+      })
+    })
     //artistToSonglistaRray sent to a function that will allow the needed function to return a promise upon completion
 
   //   Promise.all(toDelete.artistToSongs.map(artistToSong =>
@@ -130,6 +156,45 @@ export default class ApplicationViews extends Component {
   //   });
   // })
   }
+
+  deleteSetsAndSongsProvidedByArtToSong = (setsArray, setsIndex, songsArray, songsIndex, resolve) => {
+    console.log(setsArray, setsIndex)
+    if (setsIndex < setsArray.length) {
+      let setToDelete = setsArray[setsIndex]
+      this.props.addNewSongToJson({
+        "deleteId": Number(setToDelete),
+        "dataSet": "sets",
+        "fetchType": "DELETE"
+      }).then(() => this.deleteSetsAndSongsProvidedByArtToSong(setsArray, setsIndex + 1, songsArray, songsIndex,  resolve))
+    } else if (songsIndex < songsArray.length) {
+      let songToDelete = songsArray[songsIndex]
+      this.props.addNewSongToJson({
+        "deleteId": Number(songToDelete),
+        "dataSet": "songs",
+        "fetchType": "DELETE"
+      }).then(() => {
+        console.log("song Deleted")
+        this.deleteSetsAndSongsProvidedByArtToSong(setsArray, setsIndex, songsArray, songsIndex + 1,  resolve)
+      })
+      .catch(() => {
+        console.log("failed to Delete Song")
+        this.deleteSetsAndSongsProvidedByArtToSong(setsArray, setsIndex, songsArray, songsIndex,  resolve)
+      })
+    } else {
+      console.log("dude this finally worked")
+      resolve()
+    }
+    //here i'll basically dopy deleteArtistTOSongs type of functionality but using sets and songs instead
+  }
+
+  promiseForDeleteSetsAndSongsProvidedByArtToSong = (setsArray, setsIndex, songsArray, songsIndex) => {
+
+    return new Promise((resolve, reject) => {
+      this.deleteSetsAndSongsProvidedByArtToSong(setsArray, setsIndex, songsArray, songsIndex, resolve)
+    })
+  }
+
+
 //from promiseForDeleteArtistToSongs function we get all the needed data plus resolve so that function can declare promise resolution
   deleteArtistToSongs = (artistToSongsIds, artistToSongIndex, resolve) => {
     console.log(artistToSongsIds,"index",artistToSongIndex)
