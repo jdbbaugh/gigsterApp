@@ -48,8 +48,7 @@ render() {
         <React.Fragment>
             <div className="sidenav">
             <div className="login-main-text">
-                <h2 className="logo-displayed">GiGster</h2>
-                <p>Login or register here</p>
+                <h2 className="logo-displayed">Gigster</h2>
             </div>
             </div>
             <div className="main">

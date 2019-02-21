@@ -58,6 +58,7 @@ artistToSongConundrum = (newSongInfo) => {
     }
   })
   .then(() => {
+    if (this.props.chosenSet.id !== 1) {
     this.props.addToJson({
       "dataSet" : "artistToSongs",
       "fetchType" : "POST",
@@ -67,6 +68,7 @@ artistToSongConundrum = (newSongInfo) => {
         "setId": this.props.chosenSet.id
       }
     })
+    }
   })
 }
 

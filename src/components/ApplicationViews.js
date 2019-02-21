@@ -153,6 +153,10 @@ export default class ApplicationViews extends Component {
         "dataSet": "sets",
         "fetchType": "DELETE"
       }).then(() => this.deleteSetsAndSongsProvidedByArtToSong(setsArray, setsIndex + 1, songsArray, songsIndex,  resolve))
+      .catch(() => {
+        console.log("failed to delete set")
+        this.deleteSetsAndSongsProvidedByArtToSong(setsArray, setsIndex, songsArray, songsIndex,  resolve)
+      })
     } else if (songsIndex < songsArray.length) {
       let songToDelete = songsArray[songsIndex]
       this.props.addNewSongToJson({

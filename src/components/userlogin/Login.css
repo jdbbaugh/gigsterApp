@@ -171,5 +171,6 @@ body {
   }
 
   .logo-displayed {
-    font-family: 'VT323', monospace;
+    font-family: 'Shrikhand', cursive;
+    color:rgb(215, 111, 30);
   }
