@@ -142,8 +142,20 @@ export default class ApplicationViews extends Component {
           "fetchType": "DELETE"
         })
       })
+      .catch(() => {
+        console.log("failed to Delete Artist, trying again")
+        this.definitelyTimeToDeleteArtist(toDelete)
+      })
     })
   };
+
+  definitelyTimeToDeleteArtist = (toDelete) => {
+    this.props.addToJson({
+      "deleteId": toDelete.id,
+      "dataSet": "artists",
+      "fetchType": "DELETE"
+    })
+  }
 
   deleteSetsAndSongsProvidedByArtToSong = (setsArray, setsIndex, songsArray, songsIndex, resolve) => {
     if (setsIndex < setsArray.length) {

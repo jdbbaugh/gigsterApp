@@ -27,7 +27,11 @@ code {
   text-align: center;
 }
 
-/* .songSpecific-container {
+.songSpecific-container {
   text-align: center
-} */
+}
+
+.youtube-container {
+  margin-left:  24%;
+}
 
