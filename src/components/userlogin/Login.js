@@ -66,7 +66,7 @@ render() {
                         <input type="password" className="form-control" required onChange={this.handleFieldChange} id="password" placeholder="Password"/>
                     </div>
                     <button className="btn btn-login" type="submit" onClick={this.onLogin}> Submit </button>
-                    <p className="not-a-user">Not a User? <Link to="/register">Register Here</Link></p>
+                    <p className="not-a-user">Not an addict? <Link to="/register">Register Here</Link></p>
                 </form>
             </div>
             </div>
